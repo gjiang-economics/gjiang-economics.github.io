@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  25 SEP 2022 14:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  27 SEP 2022 15:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,7 +358,12 @@ LaTeX Font Info:    Trying to load font information for OT1+zplm on input line
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
-) [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+)
+Overfull \hbox (20.72156pt too wide) in paragraph at lines 102--108
+[][] 
+ []
+
+[1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
 
@@ -388,7 +393,7 @@ exlive/2020/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/local/texli
 ve/2020/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020/
 texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020/texmf-d
 ist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on cv_jiang_guohui.pdf (2 pages, 59243 bytes).
+Output written on cv_jiang_guohui.pdf (2 pages, 59246 bytes).
 PDF statistics:
  59 PDF objects out of 1000 (max. 8388607)
  50 compressed objects within 1 object stream
