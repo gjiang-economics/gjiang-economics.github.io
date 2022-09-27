@@ -1,0 +1,187 @@
+% LaTeX Curriculum Vitae Template
+%\
+% Copyright (C) 2004-2009 Jason Blevins <jrblevin@sdf.lonestar.org>
+% http://jblevins.org/projects/cv-template/
+
+% You may use use this document as a template to create your own CV
+% and you may redistribute the source code freely. No attribution is
+% required in any resulting documents. I do ask that you please leave
+% this notice and the above URL in the source code if you choose to
+% redistribute this file.
+
+\documentclass[letterpaper]{article}
+
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{eurosym}
+\usepackage{romannum}
+% Comment the following lines to use the default Computer Modern font
+% instead of the Palatino font provided by the mathpazo package.
+% Remove the 'osf' bit if you don't like the old style figures.
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+
+% Set your name here
+\def\name{Guohui Jiang}
+
+% The following metadata will show up in the PDF properties
+\hypersetup{
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {\name},
+  pdfkeywords = {economics, guohui, jiang},
+  pdftitle = {\name: Curriculum Vitae},
+  pdfsubject = {Curriculum Vitae},
+  pdfpagemode = UseNone
+}
+
+\geometry{
+  body={6.5in, 8.5in},
+  left=1.0in,
+  top=1.25in
+}
+
+% Customize page headers and footers
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0 pt}
+\cfoot{\thepage\ of \pageref*{LastPage}}
+\fancypagestyle{firstpage}
+{
+	\renewcommand{\headrulewidth}{0 pt}
+    \fancyhead[L]{}    
+    \fancyhead[R]{Last updated: \today}
+}
+\thispagestyle{firstpage}
+%If it appears on every page
+%\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{0 pt}
+%\rfoot{Last updated: \today} 
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+
+% Other possible font commands include:
+% \ttfamily for teletype,
+% \sffamily for sans serif,
+% \bfseries for bold,
+% \scshape for small caps,
+% \normalsize, \large, \Large, \LARGE sizes.
+
+% Don't indent paragraphs.
+\setlength\parindent{0em}
+
+% Make lists without bullets
+\renewenvironment{itemize}{
+  \begin{list}{}{
+    \setlength{\leftmargin}{1.5em}
+  }
+}{
+  \end{list}
+}
+
+\begin{document}
+\pagenumbering{arabic}
+
+% Place name at left
+{\huge \name}
+% Alternatively, print name centered and bold:
+%\centerline{\huge \bf \name}
+
+\vspace{0.25in}
+
+\begin{minipage}{0.45\linewidth}
+  University of Zurich \\
+  \href{https://www.econ.uzh.ch/en.html}{Department of Economics} \\
+  Schönberggasse 1 \\
+  8001 Zurich, Switzerland
+\end{minipage}
+\begin{minipage}{0.45\linewidth}
+  \begin{tabular}{ll}
+    Phone: & +41 44 634 55 73 \\
+    Email: & \href{mailto:guohui.jiang@econ.uzh.ch}{guohui.jiang@econ.uzh.ch} \\
+    Homepage: & \href{https://gjiang-econ.github.io}{https://gjiang-econ.github.io} \\
+    Gender: & Male
+  \end{tabular}
+\end{minipage}
+
+\section*{\MakeUppercase{Research Fields}}
+\begin{itemize}
+	\item Economic History, Political Economy, Cultural Economics
+\end{itemize}
+
+\section*{\MakeUppercase{education}}
+\begin{itemize}
+  \item PhD in Economics, University of Zurich, 2019-
+  %\begin{itemize}
+  %    \item PhD Dissertation:
+  %\end{itemize}
+  \item MSc in Economic Theory and Econometrics, Toulouse School of Economics, 2019.
+  %\item BSc in Economics, Shandong University, 2017.
+
+\end{itemize}
+
+\section*{\MakeUppercase{work in progress}}
+\begin{itemize}
+	\item ``Discrimination and Talent Allocation: Evidence from Tuskegee Airmen'', with \href{http://www.jvoth.com}{Hans-Joachim Voth}.
+\end{itemize}
+
+\section*{HONORS $\&$ AWARDS}
+\begin{itemize}
+    \item \href{https://www.research.uzh.ch/en/funding/phd/uzh-doc-mobility.html}{UZH Doc.Mobility Fellowship}, CHF $51,373$, 2023.
+    \item \href{https://www.ubscenter.uzh.ch/en/scholarships.html}{UBS Scholarship}, CHF $42,500$ per annum, 2019-2024.
+    \item Bourse d'Excellence, Université Toulouse 1 Capitole, \euro $1,500$, 2019.
+    \item L’Association Jean-Jacques Laffont Scholarship, \euro $6,000$, 2018.
+\end{itemize}
+
+\section*{\MakeUppercase{academic activities}}
+\subsection*{Referee}
+\begin{itemize}
+    \item \textit{Economic Journal}. % 1
+\end{itemize}
+\subsection*{Summer Schools}
+\begin{itemize}
+    \item ASREC Graduate Student Workshop (Virtual), Chapman University, April 2022.
+\end{itemize}
+\subsection*{Services}
+\begin{itemize}
+    \item Co-organizer, Reading Group in Cultural Economics and Political Economy, University of Zurich, 2021-
+    \item Member, Culture and Diversity Committee, Department of Economics, University of Zurich, 2021-2022.
+\end{itemize}
+
+%\section*{\MakeUppercase{employment}}
+%\begin{itemize}
+%    \item Research Assistant for \href{https://www.fbe.hku.hk/people/zhiwu-chen}{Zhiwu Chen} and \href{https://chichengma.weebly.com}{Chicheng Ma}, University of Hong Kong, 2019.
+%\end{itemize}
+
+\section*{\MakeUppercase{teaching}}
+\subsection*{University of Zurich}
+\begin{itemize}
+	\item Research Frontiers in Economic History (MA), Instructor: 2022 Fall.
+    \item Pioneering Economics (BA), TA for \href{https://www.econ.uzh.ch/en/people/faculty/hemous.html}{David Hémous}: 2022 Spring.
+    \item Advanced Microeconomics I (MA), TA for \href{https://www.econ.uzh.ch/en/people/faculty/weber.html}{Roberto Weber}: 2021 Fall.
+    \item Auction Theory (BA), TA for \href{https://www.econ.uzh.ch/en/people/faculty/ewerhart.html}{Christian Ewerhart}: 2021 Spring.
+\end{itemize}
+\subsection*{Toulouse School of Economics}
+\begin{itemize}
+    \item Macroeconomics \Romannum{2} (BA), TA for \href{https://www.tse-fr.eu/people/sumudu-kankanamge}{Sumudu Kankanamge}: 2019 Spring.
+\end{itemize}
+
+\section*{\MakeUppercase{Others}}
+\begin{itemize}
+    \item Languages: Chinese, English.
+    \item Software: Stata, R, Python, QGIS, \LaTeX.
+    \item Citizenship: China.
+\end{itemize}
+\bigskip
+
+% Footer
+%\begin{center}
+%  \begin{footnotesize}
+%    Last updated: \today
+%  \end{footnotesize}
+%\end{center}
+
+\end{document}
