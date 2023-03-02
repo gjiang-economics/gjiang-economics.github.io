@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  17 FEB 2023 10:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  2 MAR 2023 10:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,21 +369,21 @@ Overfull \hbox (20.72156pt too wide) in paragraph at lines 102--108
 
 AED: lastpage setting LastPage
 LaTeX Font Info:    Font shape `T1/pplj/m/sl' in size <10> not available
-(Font)              Font shape `T1/pplj/m/it' tried instead on input line 192.
+(Font)              Font shape `T1/pplj/m/it' tried instead on input line 193.
 [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 192.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 192.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 193.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 193.
  (./cv_jiang_guohui.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 192.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 192.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 193.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 193.
 Package rerunfilecheck Info: File `cv_jiang_guohui.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 192.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 193.
  ) 
 Here is how much of TeX's memory you used:
  6182 strings out of 480608
  93958 string characters out of 5903629
- 357985 words of memory out of 5000000
+ 358985 words of memory out of 5000000
  21934 multiletter control sequences out of 15000+600000
  567322 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -393,7 +393,7 @@ exlive/2020/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/local/texli
 ve/2020/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020/
 texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020/texmf-d
 ist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on cv_jiang_guohui.pdf (2 pages, 59639 bytes).
+Output written on cv_jiang_guohui.pdf (2 pages, 59700 bytes).
 PDF statistics:
  60 PDF objects out of 1000 (max. 8388607)
  51 compressed objects within 1 object stream
