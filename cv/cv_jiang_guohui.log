@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  11 DEC 2023 14:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  12 DEC 2023 11:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -215,36 +215,58 @@ LaTeX Warning: Command \underbar  has changed.
 LaTeX Warning: Command \underline  has changed.
                Check if current package is valid.
 
-) (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip59
+\enit@outerparindent=\dimen147
+\enit@toks=\toks17
+\enit@inbox=\box46
+\enit@count@id=\count188
+\enitdp@description=\count189
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2019/10/16 v2.13 Sectioning titles
+\ttl@box=\box47
+\beforetitleunit=\skip60
+\aftertitleunit=\skip61
+\ttl@plus=\dimen148
+\ttl@minus=\dimen149
+\ttl@toksa=\toks18
+\titlewidth=\dimen150
+\titlewidthlast=\dimen151
+\titlewidthfirst=\dimen152
+)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count188
-\l__pdf_internal_box=\box46
-) (./cv_jiang_guohui.aux)
+\l__kernel_color_stack_int=\count190
+\l__pdf_internal_box=\box48
+)
+(./cv_jiang_guohui.aux)
 \openout1 = `cv_jiang_guohui.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
 LaTeX Font Info:    Trying to load font information for T1+pplj on input line 8
-9.
+6.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/t1pplj.fd
 File: t1pplj.fd 2004/09/06 font definitions for T1/pplj.
 )
-\AtBeginShipoutBox=\box47
+\AtBeginShipoutBox=\box49
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
@@ -259,19 +281,19 @@ File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 
 (/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count189
-\scratchdimen=\dimen147
-\scratchbox=\box48
-\nofMPsegments=\count190
-\nofMParguments=\count191
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count192
-\MPscratchDim=\dimen148
-\MPnumerator=\count193
-\makeMPintoPDFobject=\count194
-\everyMPtoPDFconversion=\toks18
+\scratchcounter=\count191
+\scratchdimen=\dimen153
+\scratchbox=\box50
+\nofMPsegments=\count192
+\nofMParguments=\count193
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count194
+\MPscratchDim=\dimen154
+\MPnumerator=\count195
+\makeMPintoPDFobject=\count196
+\everyMPtoPDFconversion=\toks20
 )))
-Package hyperref Info: Link coloring ON on input line 89.
+Package hyperref Info: Link coloring ON on input line 86.
  (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
@@ -282,11 +304,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count195
+\c@section@level=\count197
 )
-LaTeX Info: Redefining \ref on input line 89.
-LaTeX Info: Redefining \pageref on input line 89.
-LaTeX Info: Redefining \nameref on input line 89.
+LaTeX Info: Redefining \ref on input line 86.
+LaTeX Info: Redefining \pageref on input line 86.
+LaTeX Info: Redefining \nameref on input line 86.
  (./cv_jiang_guohui.out) (./cv_jiang_guohui.out)
 \@outlinefile=\write3
 \openout3 = `cv_jiang_guohui.out'.
@@ -326,201 +348,77 @@ LaTeX Info: Redefining \nameref on input line 89.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\big@size=\dimen149
+\big@size=\dimen155
 Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             https://www.ctan.org/pkg/pageslts
-(lastpage)             ! on input line 89.
+(lastpage)             ! on input line 86.
 LaTeX Font Info:    Trying to load font information for OT1+pplx on input line 
-104.
+101.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
 LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
-104.
+101.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
-104.
+101.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
-104.
+101.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
 LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
-104.
+101.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
-Overfull \hbox (20.72156pt too wide) in paragraph at lines 106--112
+Overfull \hbox (20.72156pt too wide) in paragraph at lines 103--109
 [][] 
- []
-
-
-Underfull \hbox (badness 10000) detected at line 116
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 121
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 125
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 139
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 140
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 145
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 146
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 147
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 148
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 156
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 161
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 166
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 171
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 172
-[][]
  []
 
 [1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-Underfull \hbox (badness 10000) detected at line 173
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 178
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 179
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 190
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 191
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 192
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 193
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 197
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 202
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 203
-[][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 204
-[][]
- []
-
 
 AED: lastpage setting LastPage
 LaTeX Font Info:    Font shape `T1/pplj/m/sl' in size <10> not available
-(Font)              Font shape `T1/pplj/m/it' tried instead on input line 215.
+(Font)              Font shape `T1/pplj/m/it' tried instead on input line 208.
 [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 215.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 215.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 208.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 208.
  (./cv_jiang_guohui.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 215.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 215.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 208.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 208.
 Package rerunfilecheck Info: File `cv_jiang_guohui.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 215.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 208.
  ) 
 Here is how much of TeX's memory you used:
- 6185 strings out of 480608
- 93986 string characters out of 5903629
- 359015 words of memory out of 5000000
- 21936 multiletter control sequences out of 15000+600000
- 567322 words of font info for 78 fonts, out of 8000000 for 9000
+ 6748 strings out of 480608
+ 102466 string characters out of 5903629
+ 373332 words of memory out of 5000000
+ 22508 multiletter control sequences out of 15000+600000
+ 563834 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,11n,45p,224b,376s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,11n,45p,224b,419s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2020/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/local/texli
 ve/2020/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020/
 texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020/texmf-d
 ist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on cv_jiang_guohui.pdf (2 pages, 60241 bytes).
+Output written on cv_jiang_guohui.pdf (2 pages, 59681 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
- 17 named destinations out of 1000 (max. 500000)
+ 43 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
+ 3 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
