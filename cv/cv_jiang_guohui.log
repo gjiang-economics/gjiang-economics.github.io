@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  12 DEC 2023 11:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.29)  12 DEC 2023 11:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -415,10 +415,10 @@ exlive/2020/texmf-dist/fonts/type1/public/eurosym/feymr10.pfb></usr/local/texli
 ve/2020/texmf-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/local/texlive/2020/
 texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2020/texmf-d
 ist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on cv_jiang_guohui.pdf (2 pages, 59681 bytes).
+Output written on cv_jiang_guohui.pdf (2 pages, 59561 bytes).
 PDF statistics:
- 43 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
+ 42 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  3 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
