@@ -9,3 +9,14 @@ function toggle(id) {
     link.textContent = "[Abstract]";
   }
 }
+
+// Open all external links in a new tab automatically
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('a[href]').forEach(function (link) {
+    var href = link.getAttribute("href");
+    if (href.startsWith("http") && !link.hasAttribute("target")) {
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener");
+    }
+  });
+});
