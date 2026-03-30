@@ -84,6 +84,13 @@ p.contactinfo a:hover {
   color: #046;
 }
 
+/* Active nav link (current page) */
+p.contactinfo a.active {
+  color: #222;
+  font-weight: 600;
+  pointer-events: none;
+}
+
 /* Photo */
 .photo {
   max-width: 240px;
@@ -105,6 +112,22 @@ section h2 {
 
 section h2:first-child {
   margin-top: 0;
+}
+
+section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #393939;
+  margin-top: 22px;
+  margin-bottom: 10px;
+}
+
+code {
+  background: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
 }
 
 section p {
@@ -152,6 +175,137 @@ a:focus {
   border-left: 3px solid #ddd;
   padding: 8px 0 8px 14px;
   line-height: 1.6;
+}
+
+/* === Table of Contents (AI page) === */
+.toc {
+  background: #f8f9fa;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 30px;
+}
+
+.toc p {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #393939;
+}
+
+.toc ol {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.toc ol li {
+  margin-bottom: 4px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.toc ol li a {
+  color: #267CB9;
+  text-decoration: none;
+}
+
+.toc ol li a:hover {
+  color: #046;
+}
+
+.toc ol ol {
+  padding-left: 18px;
+  margin-top: 4px;
+}
+
+.toc ol ol li {
+  list-style-type: lower-alpha;
+}
+
+/* === Collapsible Details (AI page) === */
+details {
+  margin-bottom: 8px;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+details summary {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  color: #393939;
+  background: #f8f9fa;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: "▶";
+  font-size: 11px;
+  color: #999;
+  transition: transform 0.15s;
+  display: inline-block;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details summary:hover {
+  background: #f0f2f4;
+}
+
+details .details-content {
+  padding: 14px 14px 14px 14px;
+  border-top: 1px solid #e5e5e5;
+}
+
+details .details-content p {
+  margin-bottom: 10px;
+}
+
+details .details-content p:last-child {
+  margin-bottom: 0;
+}
+
+details .details-content ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+details .details-content ol {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+details details {
+  margin-top: 10px;
+}
+
+/* === Code Blocks (AI page) === */
+pre {
+  background: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 10px 0 14px 0;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 13px;
 }
 
 /* === Responsive === */
