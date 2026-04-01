@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Guohui Jiang - How I use AI as an Economist</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -129,6 +129,19 @@ Analysis of WWII draft records using Stata and R.
 
       <!-- SUB-SECTION 2.2: BASIC TRICKS -->
       <h3 id="basic-tricks">Basic Tricks</h3>
+
+      <details>
+        <summary>Treat Claude Code as an RA for your entire life</summary>
+        <div class="details-content">
+          <p>Claude Code has high execution power (it reads files, writes code, runs commands) and high intelligence (it reasons, plans, adapts). That combination makes it a research assistant that can handle almost any task you throw at it&mdash;not just coding, but admin, writing, data work, travel logistics, anything.</p>
+          <p><strong>The key insight: even if the first result is mediocre, it is worth teaching Claude Code how to do the task well.</strong> The investment pays off permanently. Every skill you build, every memory you save, every line in your <code>CLAUDE.md</code> makes every future session better&mdash;across every project, on every machine, forever.</p>
+          <p>Not sure how to teach it? Just ask:</p>
+<pre><code>I want Claude Code to do [X] better in the future.
+What's the best way to achieve this — a skill,
+a hook, a memory, a CLAUDE.md entry, or something else?</code></pre>
+          <p>Claude Code will tell you which mechanism fits your case. You don't need to know the system upfront&mdash;just describe what you want, and let it guide you to the right persistence layer.</p>
+        </div>
+      </details>
 
       <details>
         <summary>Plan mode for complex tasks</summary>
@@ -281,6 +294,6 @@ curl -o ~/.claude/skills/reimburse-external/SKILL.md \
     </section>
   </div>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=3"></script>
 </body>
 </html>

@@ -300,6 +300,26 @@ pre {
   overflow-x: auto;
   margin: 10px 0 14px 0;
   line-height: 1.5;
+  position: relative;
+}
+
+pre .copy-btn {
+  float: right;
+  margin: -6px -8px 4px 8px;
+  background: #e8e8e8;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-family: 'Noto Sans', sans-serif;
+  color: #555;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+pre .copy-btn:hover {
+  background: #d8d8d8;
+  color: #333;
 }
 
 pre code {
