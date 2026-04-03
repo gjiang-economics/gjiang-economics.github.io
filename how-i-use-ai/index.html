@@ -204,16 +204,17 @@ curl -o ~/.claude/skills/reflection/SKILL.md \
       </details>
 
       <details>
-        <summary>Remote control: approve tasks from your phone</summary>
+        <summary>Remote control</summary>
         <div class="details-content">
-          <p>On the Max plan, usage is calculated in <strong>5-hour windows</strong>. If Claude Code pauses mid-task waiting for a permission confirmation and you are away from your desk, those hours are wasted. <em>Remote Control</em> solves this: it lets you monitor and approve Claude Code sessions from your phone or any browser, so you can keep tasks moving even when you are not at your computer.</p>
+          <p>Claude usage is calculated in <strong>5-hour windows</strong>. If Claude Code pauses mid-task waiting for a permission confirmation and you are away from your desk, those hours are wasted. <em>Remote Control</em> solves this: it lets you monitor and approve Claude Code sessions from your phone or any browser, so you can keep tasks moving even when you are not at your computer.</p>
           <p>Remote Control connects <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a> or the Claude mobile app (<a href="https://apps.apple.com/us/app/claude-by-anthropic/id6473753684" target="_blank" rel="noopener">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank" rel="noopener">Android</a>) to your local Claude Code session. Claude keeps running on your machine the entire time&mdash;the phone or browser is just a window into that session.</p>
           <p><strong>How to use it.</strong> If you are already in a session, type:</p>
 <pre><code>/remote-control</code></pre>
           <p>Or start a new session with Remote Control enabled:</p>
 <pre><code>claude --remote-control</code></pre>
-          <p>Either way, Claude Code displays a <strong>session URL</strong> and a <strong>QR code</strong>. Scan the QR code with your phone to open the session in the Claude app, or open the URL in any browser. You can send messages from your terminal and your phone interchangeably&mdash;the conversation stays in sync.</p>
+          <p>Visit the Claude app or <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a>, where you can send messages from your phone or your browser.</p>
           <p><strong>My workflow.</strong> Before I leave the office, I start a long task with <code>/remote-control</code>. On the train home, I check my phone, approve any permission prompts, and review progress. The task keeps running without me sitting at my desk.</p>
+          <p><strong>Chaining sessions.</strong> If I know what to do after the current task finishes, I start a second session with <code>/remote-control</code> before leaving. When session one completes, I pick up session two from my phone and continue&mdash;using the results from session one.</p>
           <p>See the <a href="https://code.claude.com/docs/en/remote-control" target="_blank" rel="noopener">official documentation</a> for full details on server mode, security, and troubleshooting.</p>
         </div>
       </details>
