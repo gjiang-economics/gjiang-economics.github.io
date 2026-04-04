@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - How AI Automates Research</title>
+  <link rel="stylesheet" href="../style.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- LEFT SIDEBAR -->
+    <header>
+      <h1><a href="../index.html">Guohui Jiang</a></h1>
+      <p class="subtitle">Postdoc<br>
+        <a href="https://economics.uni-koeln.de/en/team/faculty-and-post-docs/guohui-jiang" target="_blank" rel="noopener">Department of Economics</a><br>
+        University of Cologne</p>
+      <hr>
+      <p class="contactinfo"><a href="../index.html#bio">Bio</a></p>
+      <p class="contactinfo"><a href="../index.html#contact">Contact</a></p>
+      <p class="contactinfo"><a href="../index.html#working-papers">Working Papers</a></p>
+      <p class="contactinfo"><a href="../index.html#work-in-progress">Work in Progress</a></p>
+      <p class="contactinfo"><a href="../how-i-use-ai/" target="_blank" rel="noopener">How I use AI</a></p>
+      <p class="contactinfo lastcontactinfo"><a href="#" class="active">How AI automates research</a></p>
+      <img src="../img/avatar.png" alt="Guohui Jiang" class="photo">
+    </header>
+
+    <!-- RIGHT CONTENT -->
+    <section>
+
+      <h2>How AI Automates Research</h2>
+
+      <!-- HERO -->
+      <div class="air-hero">
+        <p class="air-hero-thesis">I proposed a research question&mdash;<em>did immigration affect house prices during the Age of Mass Migration?</em>&mdash;and asked <a href="https://code.claude.com/docs/en/overview">Claude Code</a> to execute the entire research pipeline: combining datasets, constructing instruments, digitizing archives, running regressions, and writing progress reports. This page documents what happened, round by round.</p>
+        <a class="air-hero-cta" href="../uploads/progress_report_03.pdf" target="_blank" rel="noopener">Latest progress report (PDF)</a>
+      </div>
+
+      <!-- SCOREBOARD -->
+      <h3>At a glance</h3>
+      <table class="air-scoreboard">
+        <tr><th>Metric</th><th>Value</th></tr>
+        <tr><td>Rounds completed</td><td>5</td></tr>
+        <tr><td>Calendar days</td><td>11 (Mar 24 &ndash; Apr 3, 2026)</td></tr>
+        <tr><td>Observations built</td><td>78 &rarr; 461 (city-year panel)</td></tr>
+        <tr><td>AI bugs caught by human</td><td>1 (pandas rolling-window alignment)</td></tr>
+        <tr><td>AI failures</td><td>1 (Tesseract OCR: 26% accuracy)</td></tr>
+        <tr><td>Human thinking saved AI effort</td><td>2 rounds (found downloadable Excel online)</td></tr>
+        <tr><td>Progress reports produced by AI</td><td>3</td></tr>
+      </table>
+
+      <!-- TOC -->
+      <div class="toc">
+        <p>Contents</p>
+        <ol>
+          <li><a href="#question">The Research Question</a></li>
+          <li><a href="#method">How We Worked Together</a></li>
+          <li><a href="#rounds">The Rounds</a>
+            <ol>
+              <li><a href="#round1">Round 1: First Pipeline</a></li>
+              <li><a href="#round2">Round 2: Annual Panel</a></li>
+              <li><a href="#round3">Round 3: Bug Fix</a></li>
+              <li><a href="#round4">Round 4: Tesseract OCR</a></li>
+              <li><a href="#round5">Round 5: Gemini Vision API</a></li>
+            </ol>
+          </li>
+          <li><a href="#takeaways">Overall Takeaways</a></li>
+        </ol>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- THE RESEARCH QUESTION -->
+      <!-- ============================================================ -->
+      <h2 id="question">The Research Question</h2>
+
+      <p>When I first tried Claude Code in January 2026, it shocked me. I started to seriously wonder: can AI automate research? As an applied economist, my work falls into two parts: <strong>finding an exciting question</strong> and <strong>executing the analysis</strong>. Finding the right question is a matter of taste and familiarity with the literature&mdash;that is hard to automate. But constructing and analyzing data? That is where AI can shine.</p>
+
+      <p>The question came from real life. In October 2025, I was searching for an apartment in Cologne and found it extremely difficult and expensive. Some people blamed the inflow of immigrants in recent years. On March 23, 2026, I was chatting with <a href="https://scholar.google.com/citations?user=NU4M_kAAAAAJ&hl=en" target="_blank" rel="noopener">Seraphim Alvanides</a> at Essen, and we discussed whether immigration really pushes up house prices.</p>
+
+      <p>On my train ride home, two papers came to mind:</p>
+      <ul style="list-style: disc; padding-left: 20px; margin-bottom: 12px;">
+        <li style="margin-bottom: 8px;"><a href="https://doi.org/10.1093/qje/qjaf047" target="_blank" rel="noopener">Lyons et al. (2025, <em>QJE</em>)</a> &mdash; constructed annual market rent and home sales price series for American cities, 1890&ndash;2006.</li>
+        <li style="margin-bottom: 8px;"><a href="https://doi.org/10.1093/restud/rdz027" target="_blank" rel="noopener">Tabellini (2020, <em>REStud</em>)</a> &mdash; studied the effects of European immigration to U.S. cities between 1910 and 1930 using a plausible instrumental variable strategy.</li>
+      </ul>
+
+      <p>The idea was simple: combine these two datasets. Lyons provides the dependent variable (house prices), Tabellini provides the independent variable and identification strategy (immigration shares instrumented with 1900 settlement patterns). Together, they let you test whether immigration affected house prices during the Age of Mass Migration.</p>
+
+      <p>I also thought this was a perfect test case for AI-automated research: <strong>the human proposes the question and guides the strategy; AI executes the pipeline.</strong></p>
+
+      <!-- ============================================================ -->
+      <!-- HOW WE WORKED TOGETHER -->
+      <!-- ============================================================ -->
+      <h2 id="method">How We Worked Together</h2>
+
+      <p>The division of labor was consistent across all rounds:</p>
+
+      <div class="air-round-cols" style="margin-bottom: 20px;">
+        <div class="air-round-human">
+          <ul>
+            <li>Proposed the research question</li>
+            <li>Selected data sources and identification strategy</li>
+            <li>Made strategic decisions when problems arose</li>
+            <li>Verified data quality (spot-checks, cross-validation)</li>
+            <li>Interpreted results and decided next steps</li>
+          </ul>
+        </div>
+        <div class="air-round-ai">
+          <ul>
+            <li>Explored and documented unfamiliar datasets</li>
+            <li>Wrote all Stata and Python code</li>
+            <li>Built the data pipeline (25+ scripts)</li>
+            <li>Ran regressions and produced tables</li>
+            <li>Drafted progress reports (LaTeX &rarr; PDF)</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>I interacted with Claude Code through the terminal CLI. Each round was typically one session. For tips on how I use Claude Code more generally, see my <a href="../how-i-use-ai/" target="_blank" rel="noopener">How I Use AI</a> page.</p>
+
+      <!-- ============================================================ -->
+      <!-- THE ROUNDS -->
+      <!-- ============================================================ -->
+      <h2 id="rounds">The Rounds</h2>
+
+      <p><em>This experiment is ongoing. I will update this page as new rounds are completed.</em></p>
+
+      <div class="air-timeline">
+
+        <!-- ==================== ROUND 1 ==================== -->
+        <div class="air-timeline-node">
+          <details class="air-round" id="round1">
+            <summary>
+              <span class="air-round-date">Mar 24&ndash;31</span>
+              Round 1: First Pipeline &mdash; Decadal Panel
+              <span class="air-round-outcome">78 observations, 26 metros &times; 3 decades. Strong first stage but null, imprecise 2SLS result.</span>
+            </summary>
+            <div class="details-content">
+
+              <div class="air-round-cols">
+                <div class="air-round-human">
+                  <ul>
+                    <li>Downloaded replication packages for both papers</li>
+                    <li>Told Claude Code the research question and identification strategy</li>
+                    <li>Chose specification: year FE as baseline (state-year FE infeasible with 78 obs)</li>
+                  </ul>
+                </div>
+                <div class="air-round-ai">
+                  <ul>
+                    <li>Explored both datasets, learned their structure</li>
+                    <li>Designed a city crosswalk (IPUMS metarea codes)</li>
+                    <li>Built a 5-script Stata pipeline: explore &rarr; process &rarr; merge &rarr; summary stats &rarr; IV regressions</li>
+                    <li>Ran all regressions and wrote Progress Report #1</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><strong>Result:</strong> First stage F&nbsp;=&nbsp;90.6, but 2SLS&nbsp;=&nbsp;&minus;0.70 (SE&nbsp;1.84, <em>p</em>&nbsp;=&nbsp;0.70). The effect is null and extremely imprecise&mdash;confidence intervals span from &minus;4.3 to +2.9. The core problem: only 78 observations.</p>
+
+              <p><strong>Key limitation:</strong> Cannot add more cities (Lyons covers ~30 metros), but <em>can</em> increase time frequency from decadal to annual&mdash;if we can find annual immigration data. This motivated Round 2.</p>
+
+              <div class="air-lesson">When reading AI-generated progress reports, I noticed that Claude Code seemed to want to find statistically significant results. I do not know why&mdash;perhaps my prompts implied it. In this case, I genuinely had no prior: negative, zero, or positive effects were all plausible ex ante.</div>
+
+              <p><a class="air-pdf-link" href="../uploads/progress_report_01.pdf" target="_blank" rel="noopener">Progress Report #1 (PDF)</a></p>
+
+            </div>
+          </details>
+        </div>
+
+        <!-- ==================== ROUND 2 ==================== -->
+        <div class="air-timeline-node">
+          <details class="air-round" id="round2">
+            <summary>
+              <span class="air-round-date">Mar 31 &ndash; Apr 1</span>
+              Round 2: Annual Panel &mdash; More Data, New Problems
+              <span class="air-round-outcome">461 observations. Negative reduced form, but weak first stage (F&nbsp;=&nbsp;1.03). Data quality issues.</span>
+            </summary>
+            <div class="details-content">
+
+              <div class="air-round-cols">
+                <div class="air-round-human">
+                  <ul>
+                    <li>Proposed the annual strategy: the Census asks immigrants which year they entered the U.S., so we can reconstruct annual stocks from IPUMS microdata</li>
+                    <li>Found the annual national immigration flows by country in <a href="https://www.census.gov/library/publications/1975/compendia/hist_stats_colonial-1970.html" target="_blank" rel="noopener">Historical Statistics of the United States</a> (scanned PDFs)</li>
+                    <li>Provided IPUMS account credentials for data download</li>
+                  </ul>
+                </div>
+                <div class="air-round-ai">
+                  <ul>
+                    <li>Digitized immigration tables from the Historical Statistics PDF</li>
+                    <li>Downloaded complete-count Census data (320M+ records) via the IPUMS API</li>
+                    <li>Constructed 1900 settlement shares by country and metro area</li>
+                    <li>Built annual shift-share instrument</li>
+                    <li>Adapted Lyons&rsquo; hedonic methodology for annual city-level price indices</li>
+                    <li>Produced 10 new build scripts and Progress Report #2</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><strong>Result:</strong> Reduced form strongly negative: &minus;2.71*** (SE&nbsp;0.95). But the first stage is weak: F&nbsp;=&nbsp;1.03. The IPUMS-derived endogenous variable (Census stocks using year-of-immigration) does not align well with the annual flow instrument.</p>
+
+              <p><strong>Data quality flag:</strong> Post-hoc cross-validation found the digitized Historical Statistics data had errors&mdash;Italy 1900&ndash;1909 was understated by 20,000. Italy was the largest source country (~23% of European immigration), so this directly affects the instrument.</p>
+
+              <p><a class="air-pdf-link" href="../uploads/progress_report_02.pdf" target="_blank" rel="noopener">Progress Report #2 (PDF)</a></p>
+
+            </div>
+          </details>
+        </div>
+
+        <!-- ==================== ROUND 3 ==================== -->
+        <div class="air-timeline-node">
+          <details class="air-round" id="round3">
+            <summary>
+              <span class="air-round-date">Apr 1</span>
+              Round 3: Bug Fix &mdash; Strong Results Recovered
+              <span class="air-round-outcome">Found a pandas bug that broke the first stage. After fixing: 2SLS&nbsp;=&nbsp;&minus;1.43**, F&nbsp;=&nbsp;38.6.</span>
+            </summary>
+            <div class="details-content">
+
+              <div class="air-round-cols">
+                <div class="air-round-human">
+                  <ul>
+                    <li>Suspected the digitized immigration data was the problem</li>
+                    <li>Told Claude Code to double-check the data before anything else</li>
+                  </ul>
+                </div>
+                <div class="air-round-ai">
+                  <ul>
+                    <li>Cross-validated all 11 country columns against published decade totals&mdash;the data was actually fine</li>
+                    <li>Diagnosed the <em>real</em> cause: a <code>pandas</code> <code>groupby().rolling().reset_index(drop=True)</code> alignment bug that silently misaligned the 10-year rolling sum (e.g., NYC 1921: stored 22,527 vs. correct 615,553)</li>
+                    <li>Fixed with <code>.transform(lambda x: x.rolling(...).sum())</code></li>
+                    <li>Reprocessed 320M IPUMS records, re-ran full pipeline</li>
+                    <li>Wrote validation script and Progress Report #3</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><strong>Result:</strong> First stage recovered: F&nbsp;=&nbsp;38.6, coefficient&nbsp;=&nbsp;2.02*** (SE&nbsp;0.26). 2SLS: all five price measures show significant negative effects. Simple mean&nbsp;=&nbsp;&minus;1.43** (SE&nbsp;0.60). Internally consistent: Wald ratio &asymp;&nbsp;&minus;1.34, close to 2SLS estimate.</p>
+
+              <p><strong>But:</strong> Effects attenuate to zero when adding baseline controls (1900 city population &times; year, 1900 immigration &times; year). This sensitivity is unresolved.</p>
+
+              <div class="air-lesson">Always use a separate agent (or a fresh session) to double-check code from a previous round. The agent that wrote the code is unlikely to catch its own bugs. In this case, my instinct about the data quality problem was correct&mdash;but Claude Code reported that the digitization was fine. I later verified that the data quality was actually bad. The lesson: do not blindly trust AI&rsquo;s self-verification. Human spot-checks remain essential.</div>
+
+              <div class="air-lesson">Do not mix complicated tasks in one session. In Round 2, I mixed archive digitization with data construction and econometric analysis. When something went wrong, it was hard to tell which part had failed.</div>
+
+              <p><a class="air-pdf-link" href="../uploads/progress_report_03.pdf" target="_blank" rel="noopener">Progress Report #3 (PDF)</a></p>
+
+            </div>
+          </details>
+        </div>
+
+        <!-- ==================== ROUND 4 ==================== -->
+        <div class="air-timeline-node">
+          <details class="air-round" id="round4">
+            <summary>
+              <span class="air-round-date">Apr 2</span>
+              Round 4: Tesseract OCR &mdash; Total Failure
+              <span class="air-round-outcome">Attempted automated OCR of dense historical tables. Cross-check accuracy: 26%. Abandoned.</span>
+            </summary>
+            <div class="details-content">
+
+              <div class="air-round-cols">
+                <div class="air-round-human">
+                  <ul>
+                    <li>Asked Claude Code to do a clean-slate re-digitization of the full HSUS immigration table (31 countries, 151 years)</li>
+                    <li>Required a pilot-then-scale approach with human spot-checks</li>
+                    <li>Verified 11 values manually across two pilot rounds</li>
+                  </ul>
+                </div>
+                <div class="air-round-ai">
+                  <ul>
+                    <li>Proposed a Tesseract OCR pipeline (since &ldquo;these are just tables&mdash;older OCR can handle it&rdquo;)</li>
+                    <li>Built the pipeline: PDF rendering at 7&times; zoom, bounding-box extraction, column assignment, sub-total cross-checks</li>
+                    <li>Pilot: 80% accuracy (4/5 correct), with systematic 3&#x2194;8 digit confusion</li>
+                    <li>Full scale: only 26% of rows passed cross-checks</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><strong>Result:</strong> The automated Tesseract pipeline produced a 151-year &times; 31-column CSV, but ~74% of European rows had at least one incorrectly parsed value. Root causes: OCR fragment merging errors, column boundary misalignment across pages, and 3&#x2194;8 digit confusion in the scanned text. The tables were simply too dense for conventional OCR.</p>
+
+            </div>
+          </details>
+        </div>
+
+        <!-- ==================== ROUND 5 ==================== -->
+        <div class="air-timeline-node">
+          <details class="air-round" id="round5">
+            <summary>
+              <span class="air-round-date">Apr 3</span>
+              Round 5: Gemini Vision API &mdash; Better, But Unnecessary
+              <span class="air-round-outcome">Gemini achieved 79&ndash;94% accuracy. Abandoned when I found downloadable Excel data online.</span>
+            </summary>
+            <div class="details-content">
+
+              <div class="air-round-cols">
+                <div class="air-round-human">
+                  <ul>
+                    <li>Proposed using Gemini&rsquo;s multimodal Vision API as a better OCR</li>
+                    <li>Provided API key; verified 15 spot-check values</li>
+                    <li>Found the data available for <a href="https://hsus.cambridge.org/HSUSWeb/toc/hsusHome.do.html" target="_blank" rel="noopener">direct download as Excel</a> from Cambridge University Press</li>
+                    <li>Stopped Claude Code to save API credits</li>
+                  </ul>
+                </div>
+                <div class="air-round-ai">
+                  <ul>
+                    <li>Built a Gemini Vision pipeline with two-pass consistency, self-verification prompts, and correction passes</li>
+                    <li>Iterated through 3 prompt versions: accuracy went from 9% &rarr; 64% &rarr; 94% on pilot data</li>
+                    <li>Full scale: 79% (Europe), 91% (Australasia), 55% (Asia)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><strong>Result:</strong> Gemini was dramatically better than Tesseract but still fell short of the 90% target for some sections. It did not matter&mdash;the data existed online in machine-readable form all along.</p>
+
+              <div class="air-lesson">AI is like a very capable assistant&mdash;in theory it can do enormous amounts of work. But human researchers can use it more productively with better thinking. In this case, spending 5 extra minutes searching for a downloadable dataset would have saved two full rounds of digitization effort. <strong>Always check if the data already exists in a usable format before asking AI to extract it.</strong></div>
+
+            </div>
+          </details>
+        </div>
+
+        <!-- ADD NEW ROUND HERE -->
+
+      </div><!-- /air-timeline -->
+
+      <!-- ============================================================ -->
+      <!-- OVERALL TAKEAWAYS -->
+      <!-- ============================================================ -->
+      <h2 id="takeaways">Overall Takeaways</h2>
+
+      <p>Five rounds in, here is what I have learned about using AI to automate research execution:</p>
+
+      <div class="air-lesson" style="border-left-color: #267CB9; border-color: #267CB9; background: #f0f7ff;">AI executes research pipelines well&mdash;but humans must verify data quality. Claude Code built 25+ scripts, processed 320M Census records, and produced four progress reports. But it also introduced a silent pandas bug that made the first stage collapse, and its OCR digitization was unreliable. The human role is not just to direct&mdash;it is to <strong>design how to verify</strong>.</div>
+
+      <div class="air-lesson" style="border-left-color: #267CB9; border-color: #267CB9; background: #f0f7ff;">Human thinking saves AI effort. Rounds 4 and 5 (two full sessions of OCR work) could have been avoided if I had spent 5 more minutes searching for a downloadable dataset. AI can do enormous amounts of work, but a few minutes of human judgment about <em>what</em> to work on matters more than hours of AI execution.</div>
+
+      <div class="air-lesson" style="border-left-color: #267CB9; border-color: #267CB9; background: #f0f7ff;">AI may be biased toward finding significant results. I noticed this tendency in Claude Code&rsquo;s progress reports. Researchers should state their priors explicitly and instruct AI to treat null results as equally valid.</div>
+
+      <p style="margin-top: 20px;"><em>This page will be updated as the experiment continues. Last updated: April 4, 2026.</em></p>
+
+    </section>
+  </div>
+
+  <script src="../script.js?v=3"></script>
+</body>
+</html>

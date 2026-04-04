@@ -375,3 +375,243 @@ pre code {
     font-size: 18px;
   }
 }
+
+/* === AI Research Page === */
+
+/* Hero section */
+.air-hero {
+  background: #f8f9fa;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin-bottom: 30px;
+}
+
+.air-hero-thesis {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.air-hero-cta {
+  display: inline-block;
+  background: #267CB9;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.air-hero-cta:hover,
+.air-hero-cta:focus {
+  background: #1a5f8f;
+  color: #fff;
+}
+
+/* Scoreboard table */
+.air-scoreboard {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.air-scoreboard th {
+  text-align: left;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-bottom: 2px solid #e5e5e5;
+  font-size: 14px;
+  font-weight: 600;
+  color: #393939;
+}
+
+.air-scoreboard td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Timeline */
+.air-timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 3px solid #267CB9;
+  margin: 20px 0 30px 12px;
+}
+
+.air-timeline-node {
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.air-timeline-node::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 14px;
+  width: 12px;
+  height: 12px;
+  background: #267CB9;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #267CB9;
+}
+
+/* Round date badge */
+.air-round-date {
+  display: inline-block;
+  background: #267CB9;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-right: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Round outcome (visible when collapsed) */
+.air-round-outcome {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  font-weight: 400;
+  margin-top: 4px;
+  padding-left: 19px;
+}
+
+/* Two-column human/AI layout */
+.air-round-cols {
+  display: flex;
+  gap: 16px;
+  margin: 14px 0;
+}
+
+.air-round-human,
+.air-round-ai {
+  flex: 1;
+  padding: 14px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.air-round-human {
+  background: #f0f7ff;
+  border-left: 3px solid #267CB9;
+}
+
+.air-round-ai {
+  background: #f5f0ff;
+  border-left: 3px solid #7c3aed;
+}
+
+.air-round-human::before,
+.air-round-ai::before {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.air-round-human::before {
+  content: "Human";
+  color: #267CB9;
+}
+
+.air-round-ai::before {
+  content: "Claude Code";
+  color: #7c3aed;
+}
+
+.air-round-human ul,
+.air-round-ai ul {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 0;
+}
+
+.air-round-human li,
+.air-round-ai li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Lesson callout box */
+.air-lesson {
+  background: #fffbeb;
+  border: 1px solid #f59e0b;
+  border-left: 4px solid #f59e0b;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.air-lesson::before {
+  content: "Lesson: ";
+  font-weight: 700;
+  color: #b45309;
+}
+
+/* PDF link */
+.air-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.air-pdf-link::before {
+  content: "\1F4C4";
+}
+
+/* Responsive: tablet */
+@media screen and (max-width: 960px) {
+  .air-round-cols {
+    flex-direction: column;
+  }
+
+  .air-timeline {
+    padding-left: 20px;
+    margin-left: 8px;
+  }
+
+  .air-timeline-node::before {
+    left: -28px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .air-hero {
+    padding: 18px 20px;
+  }
+}
+
+/* Responsive: mobile */
+@media screen and (max-width: 480px) {
+  .air-hero {
+    padding: 14px 16px;
+  }
+
+  .air-hero-thesis {
+    font-size: 15px;
+  }
+
+  .air-round-date {
+    font-size: 11px;
+  }
+
+  .air-round-outcome {
+    font-size: 12px;
+  }
+}
