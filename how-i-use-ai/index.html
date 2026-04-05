@@ -190,6 +190,61 @@ curl -o ~/.claude/skills/reflection/SKILL.md \
         </div>
       </details>
 
+      <details id="validate-tasks">
+        <summary>Validation of complicated tasks</summary>
+        <div class="details-content">
+          <p>The agent that writes a plan has <em>planner bias</em>&mdash;like an author proofreading their own paper. It rationalizes gaps rather than catching them. The same applies after execution: the agent that built the pipeline is the least likely to notice what it missed.</p>
+          <p><strong>The solution: two automatic validation gates.</strong></p>
+          <ul>
+            <li><strong><code>validate-plan</code></strong> &mdash; Before execution begins, dispatches a <em>fresh</em> subagent (no shared context) to review the plan across 7 dimensions: data integrity, statistical logic, pipeline completeness, replication feasibility, scope, error handling, and sequencing. Verdict: PROCEED, REVISE FIRST, or STOP AND DISCUSS.</li>
+            <li><strong><code>validate-execution</code></strong> &mdash; After execution finishes, dispatches a fresh subagent to audit the completed work across 6 dimensions: plan compliance, output verification, code logic, replication documentation, data integrity, and completeness. Verdict: COMPLETE, NEEDS FIXES, or NEEDS DISCUSSION.</li>
+          </ul>
+          <p>Because each reviewer starts with a blank slate, it sees the work cold&mdash;the way a referee or replication auditor would. The key principle: <strong>don&rsquo;t let the same agent that creates a plan be the only judge of that plan.</strong></p>
+
+          <p><strong>Install the skills.</strong> Download both skill files:</p>
+<pre><code># If you use the Dropbox sync setup:
+mkdir -p ~/Dropbox/AI_meta/claude-sync/skills/validate-plan &amp;&amp; \
+curl -o ~/Dropbox/AI_meta/claude-sync/skills/validate-plan/SKILL.md \
+  https://gjiang-economics.github.io/skills/validate-plan.md
+
+mkdir -p ~/Dropbox/AI_meta/claude-sync/skills/validate-execution &amp;&amp; \
+curl -o ~/Dropbox/AI_meta/claude-sync/skills/validate-execution/SKILL.md \
+  https://gjiang-economics.github.io/skills/validate-execution.md
+
+# Otherwise:
+mkdir -p ~/.claude/skills/validate-plan &amp;&amp; \
+curl -o ~/.claude/skills/validate-plan/SKILL.md \
+  https://gjiang-economics.github.io/skills/validate-plan.md
+
+mkdir -p ~/.claude/skills/validate-execution &amp;&amp; \
+curl -o ~/.claude/skills/validate-execution/SKILL.md \
+  https://gjiang-economics.github.io/skills/validate-execution.md</code></pre>
+          <p><strong>Add to your <code>CLAUDE.md</code>.</strong> Paste this so the skills trigger automatically for research projects:</p>
+<pre><code>## Automatic Validation for Research Projects
+
+For **research project work** (data analysis, pipeline construction,
+multi-file empirical code in Stata/R/Python), two validation gates
+are mandatory:
+
+### Pre-execution: `validate-plan`
+After creating a multi-step plan for a research project, ALWAYS
+invoke the `validate-plan` skill before beginning execution.
+
+### Post-execution: `validate-execution`
+After completing execution of a multi-step research plan, ALWAYS
+invoke the `validate-execution` skill before claiming the work
+is done.
+
+### How to determine "research project work"
+A task qualifies if ANY of these are true:
+- Plan involves data files (.dta, .csv, .parquet, .rds)
+- Plan involves running Stata .do files, R scripts, or Python data scripts
+- Plan involves regression, estimation, or statistical analysis
+- Plan has 3+ steps that modify code or data files</code></pre>
+          <p>Then invoke manually anytime with <code>/validate-plan</code> or <code>/validate-execution</code>. You can view the full skill files here: <a href="../skills/validate-plan.md">validate-plan</a>, <a href="../skills/validate-execution.md">validate-execution</a>.</p>
+        </div>
+      </details>
+
       <details>
         <summary>Cross-model brainstorming</summary>
         <div class="details-content">
