@@ -34,20 +34,20 @@
       <!-- HERO -->
       <div class="air-hero">
         <p class="air-hero-thesis">I proposed a research question&mdash;<em>did immigration affect house prices during the Age of Mass Migration?</em>&mdash;and asked <a href="https://code.claude.com/docs/en/overview">Claude Code</a> to execute the entire research pipeline: combining datasets, constructing instruments, digitizing archives, running regressions, and writing progress reports. This page documents what happened, round by round.</p>
-        <a class="air-hero-cta" href="../uploads/progress_report_03.pdf" target="_blank" rel="noopener">Latest progress report (PDF)</a>
+        <a class="air-hero-cta" href="../uploads/progress_report_06.pdf" target="_blank" rel="noopener">Latest progress report (PDF)</a>
       </div>
 
       <!-- SCOREBOARD -->
       <h3>At a glance</h3>
       <table class="air-scoreboard">
         <tr><th>Metric</th><th>Value</th></tr>
-        <tr><td>Rounds completed</td><td>5</td></tr>
-        <tr><td>Calendar days</td><td>11 (Mar 24 &ndash; Apr 3, 2026)</td></tr>
+        <tr><td>Rounds completed</td><td>6</td></tr>
+        <tr><td>Calendar days</td><td>13 (Mar 24 &ndash; Apr 5, 2026)</td></tr>
         <tr><td>Observations built</td><td>78 &rarr; 461 (city-year panel)</td></tr>
-        <tr><td>AI bugs caught by human</td><td>1 (pandas rolling-window alignment)</td></tr>
+        <tr><td>AI bugs caught by human</td><td>5 (1 pandas bug + 4 pipeline bugs in audit)</td></tr>
         <tr><td>AI failures</td><td>1 (Tesseract OCR: 26% accuracy)</td></tr>
         <tr><td>Human thinking saved AI effort</td><td>2 rounds (found downloadable Excel online)</td></tr>
-        <tr><td>Progress reports produced by AI</td><td>3</td></tr>
+        <tr><td>Progress reports produced by AI</td><td>4</td></tr>
       </table>
 
       <!-- TOC -->
@@ -63,6 +63,7 @@
               <li><a href="#round3">Round 3: Bug Fix</a></li>
               <li><a href="#round4">Round 4: Tesseract OCR</a></li>
               <li><a href="#round5">Round 5: Gemini Vision API</a></li>
+              <li><a href="#round6">Round 6: Clean Rebuild</a></li>
             </ol>
           </li>
           <li><a href="#takeaways">Overall Takeaways</a></li>
@@ -319,6 +320,53 @@
           </details>
         </div>
 
+        <!-- ==================== ROUND 6 ==================== -->
+        <div class="air-timeline-node">
+          <details class="air-round" id="round6">
+            <summary>
+              <span class="air-round-date">Apr 3&ndash;5</span>
+              Round 6: Clean Rebuild &mdash; Pipeline Audit &amp; Downloaded Data
+              <span class="air-round-outcome">Full audit found 4 bugs. With clean HSUS data: F&nbsp;=&nbsp;62.4, 2SLS&nbsp;=&nbsp;&minus;1.39**. But effects vanish with baseline controls.</span>
+            </summary>
+            <div class="details-content">
+
+              <div class="air-round-cols">
+                <div class="air-round-human">
+                  <ul>
+                    <li>Found downloadable <a href="https://hsus.cambridge.org/HSUSWeb/toc/hsusHome.do.html" target="_blank" rel="noopener">HSUS Excel data</a> (Series Ad106-120) from Cambridge University Press</li>
+                    <li>Required a full pipeline audit before re-running any regressions</li>
+                    <li>Required a validate-fix-document workflow at each step</li>
+                  </ul>
+                </div>
+                <div class="air-round-ai">
+                  <ul>
+                    <li>Conducted systematic pipeline audit and found 4 bugs:
+                      <ol style="margin-top: 4px; padding-left: 18px;">
+                        <li>Poland immigration silently excluded from instrument</li>
+                        <li>BPL 457 dictionary collision (Yugoslavia vs. Bulgaria)</li>
+                        <li><code>ivreghdfe</code> compatibility failure (replaced with <code>ivreg2</code>)</li>
+                        <li>Year-interacted controls created collinearity with year FE</li>
+                      </ol>
+                    </li>
+                    <li>Wrote new HSUS Excel processing script</li>
+                    <li>Fixed all bugs and rebuilt the full pipeline with step-by-step validation</li>
+                    <li>Wrote Progress Report #6</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><strong>Result:</strong> First stage strong: F&nbsp;=&nbsp;62.4, coefficient&nbsp;=&nbsp;1.95*** (SE&nbsp;0.25). 2SLS (city + year FE only): all five price measures show significant negative effects. Simple mean&nbsp;=&nbsp;&minus;1.39** (SE&nbsp;0.60). Wald ratio&nbsp;&asymp;&nbsp;&minus;1.30, close to 2SLS (internal consistency check passes).</p>
+
+              <p><strong>But:</strong> When adding baseline controls (1900 population &times; year, 1900 immigration &times; year), all effects vanish and the first-stage F drops from 42.7 to 10.4. This is the same sensitivity issue from Round 3&mdash;now confirmed with clean data and a debugged pipeline.</p>
+
+              <div class="air-lesson">A full pipeline audit is worth the time. The 4 bugs found in Round 6 had been silently present since Round 2&mdash;Poland excluded from the instrument, a dictionary collision, a Stata compatibility failure, and a collinearity issue that made &ldquo;controlled&rdquo; and &ldquo;uncontrolled&rdquo; regressions secretly identical. None surfaced as errors; they just quietly corrupted the results. <strong>Before trusting any result, audit the entire pipeline at least once.</strong></div>
+
+              <p><a class="air-pdf-link" href="../uploads/progress_report_06.pdf" target="_blank" rel="noopener">Progress Report #6 (PDF)</a></p>
+
+            </div>
+          </details>
+        </div>
+
         <!-- ADD NEW ROUND HERE -->
 
       </div><!-- /air-timeline -->
@@ -336,7 +384,7 @@
 
       <div class="air-lesson" style="border-left-color: #267CB9; border-color: #267CB9; background: #f0f7ff;">AI may be biased toward finding significant results. I noticed this tendency in Claude Code&rsquo;s progress reports. Researchers should state their priors explicitly and instruct AI to treat null results as equally valid.</div>
 
-      <p style="margin-top: 20px;"><em>This page will be updated as the experiment continues. Last updated: April 4, 2026.</em></p>
+      <p style="margin-top: 20px;"><em>This page will be updated as the experiment continues. Last updated: April 5, 2026.</em></p>
 
     </section>
   </div>
