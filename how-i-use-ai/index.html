@@ -199,6 +199,7 @@ curl -o ~/.claude/skills/reflection/SKILL.md \
             <li><strong><code>validate-plan</code></strong> &mdash; Before execution begins, dispatches a <em>fresh</em> subagent (no shared context) to review the plan across 7 dimensions: data integrity, statistical logic, pipeline completeness, replication feasibility, scope, error handling, and sequencing. Verdict: PROCEED, REVISE FIRST, or STOP AND DISCUSS.</li>
             <li><strong><code>validate-execution</code></strong> &mdash; After execution finishes, dispatches a fresh subagent to audit the completed work across 6 dimensions: plan compliance, output verification, code logic, replication documentation, data integrity, and completeness. Verdict: COMPLETE, NEEDS FIXES, or NEEDS DISCUSSION.</li>
           </ul>
+          <p>The idea of checking through a battery of tests across many dimensions draws from <a href="https://x.com/alz_zyd_/status/2040860277407625464?s=20" target="_blank" rel="noopener">Anthony Lee Zhang</a>.</p>
           <p>Because each reviewer starts with a blank slate, it sees the work cold&mdash;the way a referee or replication auditor would. The key principle: <strong>don&rsquo;t let the same agent that creates a plan be the only judge of that plan.</strong></p>
 
           <p><strong>Install the skills.</strong> Download both skill files:</p>

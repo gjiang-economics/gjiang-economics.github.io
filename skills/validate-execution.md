@@ -5,7 +5,9 @@ description: Dispatch an independent subagent to validate completed research wor
 
 # Validate Execution — Post-Execution Research Work Review
 
-*v1.0 — Independent subagent validation of completed research work*
+*v2.0 — Independent subagent validation of completed research work*
+
+> **Philosophy:** For LLM-generated code, output-based testing is more efficient than input-based code review. The subagent should prioritize checking what the code *produced* over reading how it works. Write a massive battery of sanity tests on outputs — if it looks like a duck and quacks like a duck for a large enough set of tests, it's a legit duck.
 
 Dispatch a fresh-context subagent to validate that the executed work is correct, complete, and properly documented. The reviewer compares what was planned against what was actually done.
 
@@ -92,7 +94,7 @@ PROJECT STANDARDS:
   limitations, human-AI contributions, replication link, output files
 - Replication file in writeup/replication/ for each session
 
-Review across these 6 dimensions:
+Review across these 7 dimensions:
 
 1. PLAN COMPLIANCE
    - For each planned step: was it completed, skipped, or modified?
@@ -137,6 +139,32 @@ Review across these 6 dimensions:
    - Did the session produce what it set out to produce?
    - Are there any temporary or debug files that should be cleaned up?
 
+7. OUTPUT SANITY TESTS (CRITICAL — prioritize this dimension)
+   Design and RUN black-box sanity tests on every major output produced.
+   Do not just review the code — actually load/inspect the outputs and test them.
+
+   For datasets (.dta, .csv, .parquet, .rds):
+   - Check row count, column count, no all-missing columns
+   - Verify value ranges for key variables (e.g., year in [1800, 2025], age > 0)
+   - Check for unexpected duplicates on ID variables
+   - Verify panel structure (unique ID-time combinations if applicable)
+   - Compare N against what the plan or progress report expected
+
+   For regression/estimation outputs:
+   - Check coefficient signs match economic intuition or prior literature
+   - Verify standard errors are reasonable (not 0, not astronomically large)
+   - Check N matches the expected sample size
+   - Verify R-squared or fit statistics are plausible
+
+   For figures/tables:
+   - Verify the underlying data file exists and has expected structure
+   - Check that labels and categories match the data
+
+   For any output:
+   - Compare against benchmarks mentioned in the plan or progress.md
+   - Run at least 5 sanity tests per major output file
+   - Flag any output that cannot be tested as a concern
+
 FORMAT YOUR OUTPUT EXACTLY AS:
 
 EXECUTION VALIDATION — [Session/Plan Name]
@@ -162,6 +190,15 @@ OUTPUT INVENTORY
 |-----------------|--------|-------|
 | [file/result]   | [exists/missing/different] | [details] |
 
+SANITY TEST BATTERY
+| # | Output file | Test description | Expected | Actual | Result |
+|---|-------------|------------------|----------|--------|--------|
+| 1 | [file]      | [what was tested] | [value]  | [value]| PASS/FAIL |
+| 2 | ...         | ...               | ...      | ...    | ...    |
+
+Tests run: [N] | Passed: [N] | Failed: [N]
+CRITICAL failures: [list any tests where failure indicates fundamentally wrong output]
+
 REPLICATION STATUS
 - progress.md updated: [Yes/No]
 - Replication file created: [Yes/No/N/A]
@@ -169,6 +206,11 @@ REPLICATION STATUS
 
 VERDICT: COMPLETE / INCOMPLETE — NEEDS FIXES / INCOMPLETE — NEEDS DISCUSSION
 [1-2 sentence summary]
+
+Verdict override rules:
+- If ANY sanity test flagged as CRITICAL fails → verdict MUST be INCOMPLETE — NEEDS FIXES
+- If >50% of all sanity tests fail → verdict MUST be INCOMPLETE — NEEDS FIXES
+  regardless of how other dimensions look
 
 RECOMMENDED ACTIONS (if not COMPLETE)
 [Numbered list of specific things to do before ending the session]
@@ -193,7 +235,7 @@ If the Agent tool fails or is unavailable, perform the review inline using this 
 
 > **AUDITOR STANCE:** You are now the replication auditor, not the implementer. Do not rationalize. Your job is to verify that the work is correct, complete, and reproducible.
 
-Review against the same 6 dimensions and produce the same output format.
+Review against the same 7 dimensions and produce the same output format.
 
 ## Examples
 

@@ -5,7 +5,9 @@ description: Dispatch an independent subagent to critically review a research pr
 
 # Validate Plan — Pre-Execution Research Plan Review
 
-*v1.0 — Independent subagent review of research plans before execution begins*
+*v2.0 — Independent subagent review of research plans before execution begins*
+
+> **Philosophy:** For LLM-generated code, output-based testing is more efficient than input-based code review. The subagent should prioritize designing tests for what the code *will produce* over reviewing how it works. If it looks like a duck and quacks like a duck for a large enough set of tests, it's a legit duck.
 
 Dispatch a fresh-context subagent to critically evaluate a research project plan. The reviewer has no planner bias — it sees the plan cold, like a referee or replication auditor would.
 
@@ -81,7 +83,7 @@ PROJECT STANDARDS:
 - Every session must produce replication documentation
 - progress.md must be updated with date, what, how, findings, limitations
 
-Review across these 7 dimensions:
+Review across these 8 dimensions:
 
 1. DATA INTEGRITY
    - Does the plan preserve raw data immutability?
@@ -127,6 +129,22 @@ Review across these 7 dimensions:
    - Are there hidden dependencies between steps?
    - Can steps be parallelized?
 
+8. OUTPUT TEST DESIGN
+   - For EVERY step that produces an output (dataset, table, figure, regression),
+     propose specific sanity tests that should be run after that step
+   - Types of sanity tests to consider:
+     * Row counts before/after merge (no unexpected drops or duplications)
+     * Variable ranges and summary statistics match expectations
+     * Known benchmark values reproduced (e.g., "Table 1 shows N=5,000")
+     * Cross-tabulations that should yield known distributions
+     * Sign and magnitude checks on regression coefficients
+     * Missing value counts and patterns
+     * Panel structure checks (unique ID-time combinations)
+     * Balance checks between treatment and control groups
+   - If a step produces an output but you cannot propose a sanity test,
+     flag it as a YELLOW FLAG — every output should be testable
+   - Propose at least 3 tests per major output (dataset or regression table)
+
 FORMAT YOUR OUTPUT EXACTLY AS:
 
 PLAN VALIDATION — [Plan Title or Summary]
@@ -144,6 +162,16 @@ GREEN (strengths worth noting)
 
 VERDICT: PROCEED / REVISE FIRST / STOP AND DISCUSS
 [1-2 sentence justification]
+
+SUGGESTED SANITY TESTS
+For each major output in the plan, list tests to run after that step:
+
+Step [N] → [output description]
+  1. [Test description] — Expected: [value/condition]
+  2. [Test description] — Expected: [value/condition]
+  3. [Test description] — Expected: [value/condition]
+
+[Repeat for each output-producing step]
 
 SUGGESTED PLAN AMENDMENTS (if REVISE)
 [Numbered list of specific additions or changes]
@@ -168,7 +196,7 @@ If the Agent tool fails or is unavailable, perform the review inline using this 
 
 > **CRITIC STANCE:** You are now the critic, not the planner. Do not rationalize. Your job is to find what's missing, what will break, and what's wishful thinking.
 
-Review against the same 7 dimensions and produce the same output format.
+Review against the same 8 dimensions and produce the same output format.
 
 ## Examples
 
