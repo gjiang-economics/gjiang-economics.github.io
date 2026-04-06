@@ -48,6 +48,7 @@
           <li><a href="#chat-bot">Chat Bot</a>
             <ol>
               <li><a href="#ai-learning">Learning in an AI-Driven Economy</a></li>
+              <li><a href="#brainstorming-research">Brainstorming Research</a></li>
             </ol>
           </li>
         </ol>
@@ -367,6 +368,21 @@ curl -o ~/.claude/skills/reimburse-external/SKILL.md \
         <div class="details-content">
           <p>Pick a topic you want to learn. Tell the AI your background, how much time you have, and what you want to understand. Ask it to build a study plan&mdash;readings, key ideas, and an order to work through them. As you read, use the AI to ask questions, check your understanding, and explore connections. What used to take days of searching and filtering now takes hours.</p>
           <p>This idea comes from <a href="https://x.com/JesusFerna7026/status/2036162175325065281" target="_blank" rel="noopener">a post by Jesús Fernández-Villaverde</a>, who used AI to design a self-guided study of sociologist Erving Goffman&mdash;and found the experience comparable to a master's-level course week.</p>
+        </div>
+      </details>
+
+      <!-- SUB-SECTION 3.2: BRAINSTORMING RESEARCH -->
+      <h3 id="brainstorming-research">Brainstorming Research</h3>
+
+      <details>
+        <summary>Avoid sycophancy</summary>
+        <div class="details-content">
+          <p>AI chatbots trained with reinforcement learning from human feedback (RLHF) tend to be <em>sycophantic</em>&mdash;they default to agreement and flattery rather than honest critique. This is counterproductive when you want to brainstorm research ideas, because what you need is genuine pushback, not validation.</p>
+          <p><strong>The fix (Claude).</strong> Go to <strong>Settings &rarr; General &rarr; &ldquo;What personal preferences should Claude consider in responses?&rdquo;</strong> and add:</p>
+<pre><code>Be direct and honest. Don't default to agreement
+or flattery: I prefer candid feedback, especially
+on my research.</code></pre>
+          <p>This overrides the default RLHF tendency at the preference level, so every conversation starts with the instruction to be candid rather than agreeable.</p>
         </div>
       </details>
 
