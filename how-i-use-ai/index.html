@@ -307,6 +307,18 @@ New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.claude\CLAUDE.md" `
         </div>
       </details>
 
+      <details>
+        <summary>Remove AI-generated writing patterns</summary>
+        <div class="details-content">
+          <p>AI-generated text has telltale patterns&mdash;inflated language, filler phrases, em dashes everywhere. The <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener">humanizer</a> skill detects 29 such patterns and rewrites text to sound natural.</p>
+          <p><strong>Claude Code.</strong> Install the skill and run <code>/humanizer</code>:</p>
+<pre><code>mkdir -p ~/.claude/skills/humanizer &amp;&amp; \
+git clone https://github.com/blader/humanizer.git \
+  ~/.claude/skills/humanizer</code></pre>
+          <p><strong>Claude AI (web) &amp; Claude Desktop.</strong> Create a Project, then paste the contents of the <a href="https://github.com/blader/humanizer/blob/main/SKILL.md" target="_blank" rel="noopener">SKILL.md file</a> into the Project&rsquo;s custom instructions. Every conversation in that project will then follow the humanizer rules.</p>
+        </div>
+      </details>
+
       <!-- SUB-SECTION 2.3: ADMINISTRATIVE WORK -->
       <h3 id="admin-work">Claude Code for Administrative Work</h3>
 
