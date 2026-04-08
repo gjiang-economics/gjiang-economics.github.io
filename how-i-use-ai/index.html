@@ -319,6 +319,20 @@ git clone https://github.com/blader/humanizer.git \
         </div>
       </details>
 
+      <details>
+        <summary>Hooks: automatic guardrails and context injection</summary>
+        <div class="details-content">
+          <p>Hooks are small shell scripts that Claude Code runs automatically when specific events happen&mdash;for example, every time you submit a prompt, before a tool runs, or after a file is edited. You configure them once, and they fire in the background from then on.</p>
+          <p><strong>Why bother?</strong> Without hooks, you rely on memory (yours or the AI&rsquo;s) to enforce rules every session. Hooks make enforcement automatic. A few examples of what they can do:</p>
+          <ul>
+            <li><strong>Inject context</strong> &mdash; The dictation hook <a href="#general-tips">described above</a> tells Claude that your prompt was speech-to-text and may contain transcription errors. Claude silently corrects them instead of asking you to clarify.</li>
+            <li><strong>Block dangerous actions</strong> &mdash; A hook can intercept a tool call before it runs and reject it if, say, Claude is about to force-push to <code>main</code> or delete a file you did not approve.</li>
+            <li><strong>Automate repetitive steps</strong> &mdash; A hook can run linting, update a changelog, or notify you whenever Claude finishes a particular kind of task.</li>
+          </ul>
+          <p>For a curated collection of useful hooks, see <a href="https://x.com/zodchiii/status/2040000216456143002" target="_blank" rel="noopener">this tweet by @zodchiii</a>. To learn more about the hook system, see the <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">official hooks documentation</a>.</p>
+        </div>
+      </details>
+
       <!-- SUB-SECTION 2.3: ADMINISTRATIVE WORK -->
       <h3 id="admin-work">Claude Code for Administrative Work</h3>
 
