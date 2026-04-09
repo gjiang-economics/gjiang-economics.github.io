@@ -34,20 +34,20 @@
       <!-- HERO -->
       <div class="air-hero">
         <p class="air-hero-thesis">I proposed a research question&mdash;<em>did immigration affect house prices during the Age of Mass Migration?</em>&mdash;and asked <a href="https://code.claude.com/docs/en/overview">Claude Code</a> to execute the entire research pipeline: combining datasets, constructing instruments, digitizing archives, running regressions, and writing progress reports. This page documents what happened, round by round.</p>
-        <a class="air-hero-cta" href="../uploads/progress_report_06.pdf" target="_blank" rel="noopener">Latest progress report (PDF)</a>
+        <a class="air-hero-cta" href="../uploads/progress_report_07.pdf" target="_blank" rel="noopener">Latest progress report (PDF)</a>
       </div>
 
       <!-- SCOREBOARD -->
       <h3>At a glance</h3>
       <table class="air-scoreboard">
         <tr><th>Metric</th><th>Value</th></tr>
-        <tr><td>Rounds completed</td><td>6</td></tr>
-        <tr><td>Calendar days</td><td>13 (Mar 24 &ndash; Apr 5, 2026)</td></tr>
+        <tr><td>Rounds completed</td><td>7</td></tr>
+        <tr><td>Calendar days</td><td>17 (Mar 24 &ndash; Apr 9, 2026)</td></tr>
         <tr><td>Observations built</td><td>78 &rarr; 461 (city-year panel)</td></tr>
-        <tr><td>AI bugs caught by human</td><td>5 (1 pandas bug + 4 pipeline bugs in audit)</td></tr>
+        <tr><td>AI bugs caught by human</td><td>7 (1 pandas bug + 4 pipeline bugs in audit + 2 crosswalk bugs)</td></tr>
         <tr><td>AI failures</td><td>1 (Tesseract OCR: 26% accuracy)</td></tr>
         <tr><td>Human thinking saved AI effort</td><td>2 rounds (found downloadable Excel online)</td></tr>
-        <tr><td>Progress reports produced by AI</td><td>4</td></tr>
+        <tr><td>Progress reports produced by AI</td><td>5</td></tr>
       </table>
 
       <!-- TOC -->
@@ -64,6 +64,7 @@
               <li><a href="#round4">Round 4: Tesseract OCR</a></li>
               <li><a href="#round5">Round 5: Gemini Vision API</a></li>
               <li><a href="#round6">Round 6: Clean Rebuild</a></li>
+              <li><a href="#round7">Round 7: Data Validation</a></li>
             </ol>
           </li>
           <li><a href="#takeaways">Overall Takeaways</a></li>
@@ -367,6 +368,52 @@
           </details>
         </div>
 
+        <!-- ==================== ROUND 7 ==================== -->
+        <div class="air-timeline-node">
+          <details class="air-round" id="round7">
+            <summary>
+              <span class="air-round-date">Apr 5&ndash;9</span>
+              Round 7: Data Validation &mdash; Geographic Variable &amp; YRIMMIG Heaping
+              <span class="air-round-outcome">Validated METAREA aggregation (r&nbsp;=&nbsp;0.978) and YRIMMIG heaping (classical error). Found 2 crosswalk bugs along the way.</span>
+            </summary>
+            <div class="details-content">
+
+              <div class="air-round-cols">
+                <div class="air-round-human">
+                  <ul>
+                    <li>Annotated progress report PDF with concerns about two variables: CITY vs METAREA geographic aggregation and YRIMMIG heaping</li>
+                    <li>Found a crosswalk bug via annotation review (Ireland&rsquo;s weak correlation)</li>
+                    <li>Directed corrections across 4 sub-versions (v1&ndash;v4)</li>
+                  </ul>
+                </div>
+                <div class="air-round-ai">
+                  <ul>
+                    <li>Built investigation script (<code>13_investigate_city_yrimmig.py</code>), produced 16 figures and 7 tables</li>
+                    <li>Validated METAREA vs CITY: settlement shares correlation r&nbsp;=&nbsp;0.978&mdash;METAREA aggregation is fine</li>
+                    <li>Validated YRIMMIG heaping: heaping is classical measurement error, does not affect the instrument</li>
+                    <li>Fixed 2 crosswalk bugs:
+                      <ol style="margin-top: 4px; padding-left: 18px;">
+                        <li>BPL 421 (Northern Ireland) mapped to wrong country group</li>
+                        <li>BPL 435 (Italy, n.s.) left unmapped and silently dropped</li>
+                      </ol>
+                    </li>
+                    <li>Corrected Census assignment rule for boundary-year arrivals and wrote Progress Report #7</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><strong>Result:</strong> Both variables validated. METAREA aggregation preserves settlement share variation (r&nbsp;=&nbsp;0.978 with CITY-level shares). YRIMMIG heaping is classical measurement error that attenuates but does not bias the instrument. Pipeline choices confirmed as sound.</p>
+
+              <p><strong>Bonus:</strong> The validation process itself uncovered 2 crosswalk bugs (Northern Ireland mapped wrong, Italy n.s. unmapped) that had been silently present in the pipeline.</p>
+
+              <div class="air-lesson">Validation rounds pay for themselves. This round started as a check on two suspicious variables and ended up finding two real bugs. The variables turned out to be fine, but the bugs were not&mdash;a reminder that the act of looking closely at data always teaches you something.</div>
+
+              <p><a class="air-pdf-link" href="../uploads/progress_report_07.pdf" target="_blank" rel="noopener">Progress Report #7 (PDF)</a></p>
+
+            </div>
+          </details>
+        </div>
+
         <!-- ADD NEW ROUND HERE -->
 
       </div><!-- /air-timeline -->
@@ -376,7 +423,7 @@
       <!-- ============================================================ -->
       <h2 id="takeaways">Overall Takeaways</h2>
 
-      <p>Five rounds in, here is what I have learned about using AI to automate research execution:</p>
+      <p>Seven rounds in, here is what I have learned about using AI to automate research execution:</p>
 
       <div class="air-lesson" style="border-left-color: #267CB9; border-color: #267CB9; background: #f0f7ff;">AI executes research pipelines well&mdash;but humans must verify data quality. Claude Code built 25+ scripts, processed 320M Census records, and produced four progress reports. But it also introduced a silent pandas bug that made the first stage collapse, and its OCR digitization was unreliable. The human role is not just to direct&mdash;it is to <strong>design how to verify</strong>. (For how I automated verification, see <a href="../how-i-use-ai/#validate-tasks">Trick: Validation of complicated tasks</a>.)</div>
 
@@ -386,7 +433,9 @@
 
       <div class="air-lesson" style="border-left-color: #267CB9; border-color: #267CB9; background: #f0f7ff;">How to decide how many tasks to put in one Claude Code session. Think of it like delegating to a research assistant. The right number of tasks per session is the maximum you can assign without sending them down the wrong path. That ceiling depends on how well you understand the model&rsquo;s current strengths and weaknesses&mdash;a judgment that itself needs learning and updating as the model improves over time.</div>
 
-      <p style="margin-top: 20px;"><em>This page will be updated as the experiment continues. Last updated: April 8, 2026.</em></p>
+      <div class="air-lesson" style="border-left-color: #267CB9; border-color: #267CB9; background: #f0f7ff;">In any micro-project, there are always vulnerable or weak links in the data pipeline. It is worth starting a separate session specifically to find and stress-test the weakest link. In Round 7, the weakest links turned out to be fine&mdash;but the process of testing them uncovered two real bugs that would have gone unnoticed otherwise.</div>
+
+      <p style="margin-top: 20px;"><em>This page will be updated as the experiment continues. Last updated: April 9, 2026.</em></p>
 
     </section>
   </div>
