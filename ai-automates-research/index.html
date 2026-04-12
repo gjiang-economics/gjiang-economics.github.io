@@ -18,12 +18,6 @@
   <!-- MAIN CONTENT -->
   <main class="content">
 
-    <!-- Cross-navigation between content pages -->
-    <div class="cross-nav">
-      <a href="../how-i-use-ai/">How I Use AI</a>
-      <span class="active">How AI Automates Research</span>
-    </div>
-
     <h1>How AI Automates Research</h1>
 
     <!-- HERO -->
@@ -113,7 +107,7 @@
       </div>
     </div>
 
-    <p>I interacted with Claude Code through the terminal CLI. Each round was typically one session. For tips on how I use Claude Code more generally, see my <a href="../how-i-use-ai/">How I Use AI</a> page.</p>
+    <p>I interacted with Claude Code through the terminal CLI. Each round was typically one session. For tips on how I use Claude Code more generally, see my <a href="../uploads/how_i_use_ai.pdf" target="_blank" rel="noopener">How I Use AI</a> guide (PDF).</p>
 
     <!-- ============================================================ -->
     <!-- THE ROUNDS -->
@@ -236,7 +230,7 @@
 
             <p><strong>But:</strong> Effects attenuate to zero when adding baseline controls (1900 city population &times; year, 1900 immigration &times; year). This sensitivity is unresolved.</p>
 
-            <div class="air-lesson">Always use a separate agent (or a fresh session) to double-check code from a previous round. The agent that wrote the code is unlikely to catch its own bugs. In this case, my instinct about the data quality problem was correct&mdash;but Claude Code reported that the digitization was fine. I later verified that the data quality was actually bad. The lesson: do not blindly trust AI&rsquo;s self-verification. Human spot-checks remain essential. (I later automated this principle&mdash;see <a href="../how-i-use-ai/#validate-tasks">Trick: Validation of complicated tasks</a>.)</div>
+            <div class="air-lesson">Always use a separate agent (or a fresh session) to double-check code from a previous round. The agent that wrote the code is unlikely to catch its own bugs. In this case, my instinct about the data quality problem was correct&mdash;but Claude Code reported that the digitization was fine. I later verified that the data quality was actually bad. The lesson: do not blindly trust AI&rsquo;s self-verification. Human spot-checks remain essential. (I later automated this principle&mdash;see <a href="../uploads/how_i_use_ai.pdf" target="_blank" rel="noopener">How I Use AI</a>.)</div>
 
             <div class="air-lesson">Do not mix complicated tasks in one session. In Round 2, I mixed archive digitization with data construction and econometric analysis. When something went wrong, it was hard to tell which part had failed.</div>
 
@@ -355,7 +349,7 @@
 
             <p><strong>But:</strong> When adding baseline controls (1900 population &times; year, 1900 immigration &times; year), all effects vanish and the first-stage F drops from 42.7 to 10.4. This is the same sensitivity issue from Round 3&mdash;now confirmed with clean data and a debugged pipeline.</p>
 
-            <div class="air-lesson">A full pipeline audit is worth the time. The 4 bugs found in Round 6 had been silently present since Round 2&mdash;Poland excluded from the instrument, a dictionary collision, a Stata compatibility failure, and a collinearity issue that made &ldquo;controlled&rdquo; and &ldquo;uncontrolled&rdquo; regressions secretly identical. None surfaced as errors; they just quietly corrupted the results. <strong>Before trusting any result, audit the entire pipeline at least once.</strong> (I now automate this step&mdash;see <a href="../how-i-use-ai/#validate-tasks">Trick: Validation of complicated tasks</a>.)</div>
+            <div class="air-lesson">A full pipeline audit is worth the time. The 4 bugs found in Round 6 had been silently present since Round 2&mdash;Poland excluded from the instrument, a dictionary collision, a Stata compatibility failure, and a collinearity issue that made &ldquo;controlled&rdquo; and &ldquo;uncontrolled&rdquo; regressions secretly identical. None surfaced as errors; they just quietly corrupted the results. <strong>Before trusting any result, audit the entire pipeline at least once.</strong> (I now automate this step&mdash;see <a href="../uploads/how_i_use_ai.pdf" target="_blank" rel="noopener">How I Use AI</a>.)</div>
 
             <p><a class="air-pdf-link" href="../uploads/progress_report_06.pdf" target="_blank" rel="noopener">Progress Report #6 (PDF)</a></p>
 
@@ -420,7 +414,7 @@
 
     <p>Seven rounds in, here is what I have learned about using AI to automate research execution:</p>
 
-    <div class="air-lesson">AI executes research pipelines well&mdash;but humans must verify data quality. Claude Code built 25+ scripts, processed 320M Census records, and produced four progress reports. But it also introduced a silent pandas bug that made the first stage collapse, and its OCR digitization was unreliable. The human role is not just to direct&mdash;it is to <strong>design how to verify</strong>. (For how I automated verification, see <a href="../how-i-use-ai/#validate-tasks">Trick: Validation of complicated tasks</a>.)</div>
+    <div class="air-lesson">AI executes research pipelines well&mdash;but humans must verify data quality. Claude Code built 25+ scripts, processed 320M Census records, and produced four progress reports. But it also introduced a silent pandas bug that made the first stage collapse, and its OCR digitization was unreliable. The human role is not just to direct&mdash;it is to <strong>design how to verify</strong>. (For how I automated verification, see <a href="../uploads/how_i_use_ai.pdf" target="_blank" rel="noopener">How I Use AI</a>.)</div>
 
     <div class="air-lesson">Human thinking saves AI effort. Rounds 4 and 5 (two full sessions of OCR work) could have been avoided if I had spent 5 more minutes searching for a downloadable dataset. AI can do enormous amounts of work, but a few minutes of human judgment about <em>what</em> to work on matters more than hours of AI execution.</div>
 
