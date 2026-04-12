@@ -1,0 +1,687 @@
+/* ==========================================================================
+   Content Page Design System — Editorial / Reading-focused
+   Used by: how-i-use-ai/, ai-automates-research/
+   Distinct from the academic homepage (style.css)
+   ========================================================================== */
+
+/* === Design Tokens === */
+:root {
+  /* Colors — warm ink / charcoal editorial palette */
+  --cp-text: #292524;
+  --cp-text-secondary: #57534e;
+  --cp-text-muted: #a8a29e;
+  --cp-accent: #b45309;
+  --cp-accent-hover: #92400e;
+  --cp-accent-bg: #fffbeb;
+  --cp-bg: #fafaf9;
+  --cp-bg-surface: #f5f5f4;
+  --cp-bg-code: #f5f5f4;
+  --cp-border: #e7e5e4;
+  --cp-border-light: #f5f5f4;
+
+  /* Typography */
+  --cp-font-sans: 'Inter', -apple-system, system-ui, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --cp-font-mono: ui-monospace, 'SF Mono', SFMono-Regular, 'Menlo', 'Consolas', monospace;
+
+  /* Spacing */
+  --cp-space-xs: 4px;
+  --cp-space-sm: 8px;
+  --cp-space-md: 16px;
+  --cp-space-lg: 24px;
+  --cp-space-xl: 32px;
+  --cp-space-2xl: 48px;
+
+  /* Radius */
+  --cp-radius-sm: 4px;
+  --cp-radius-md: 6px;
+  --cp-radius-lg: 10px;
+
+  /* Content width */
+  --cp-content-width: 680px;
+}
+
+/* === Reset & Base === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--cp-font-sans);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--cp-text);
+  background: var(--cp-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Top Navigation Bar === */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--cp-bg);
+  border-bottom: 1px solid var(--cp-border);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  background: rgba(250, 250, 249, 0.92);
+}
+
+.topbar-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--cp-text);
+  text-decoration: none;
+}
+
+.topbar-name:hover {
+  color: var(--cp-accent);
+}
+
+.topbar-back {
+  font-size: 14px;
+  color: var(--cp-text-secondary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.topbar-back:hover {
+  color: var(--cp-accent);
+}
+
+/* === Main Content === */
+.content {
+  max-width: var(--cp-content-width);
+  margin: 0 auto;
+  padding: var(--cp-space-2xl) var(--cp-space-lg);
+}
+
+/* === Cross-Navigation === */
+.cross-nav {
+  display: flex;
+  gap: var(--cp-space-md);
+  margin-bottom: var(--cp-space-xl);
+  padding-bottom: var(--cp-space-md);
+  border-bottom: 1px solid var(--cp-border-light);
+}
+
+.cross-nav a {
+  font-size: 14px;
+  color: var(--cp-text-muted);
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--cp-border);
+  transition: all 0.15s;
+}
+
+.cross-nav a:hover {
+  color: var(--cp-accent);
+  border-color: var(--cp-accent);
+}
+
+.cross-nav .active {
+  color: var(--cp-text);
+  background: var(--cp-bg-surface);
+  border: 1px solid var(--cp-text-muted);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* === Typography === */
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+  color: var(--cp-text);
+  margin-bottom: var(--cp-space-md);
+}
+
+.page-subtitle {
+  font-size: 17px;
+  color: var(--cp-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--cp-space-lg);
+}
+
+.page-updated {
+  font-size: 14px;
+  color: var(--cp-text-secondary);
+  font-style: italic;
+  margin-bottom: var(--cp-space-xl);
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--cp-text);
+  margin-top: var(--cp-space-2xl);
+  margin-bottom: var(--cp-space-md);
+  padding-bottom: var(--cp-space-sm);
+  border-bottom: 1px solid var(--cp-border);
+}
+
+h3 {
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--cp-text-secondary);
+  margin-top: 40px;
+  margin-bottom: var(--cp-space-sm);
+}
+
+p {
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+/* === Links === */
+a {
+  color: var(--cp-accent);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+a:hover,
+a:focus {
+  color: var(--cp-accent-hover);
+}
+
+/* === Table of Contents === */
+.toc {
+  background: var(--cp-bg-surface);
+  border: 1px solid var(--cp-border);
+  border-radius: var(--cp-radius-lg);
+  padding: var(--cp-space-lg) var(--cp-space-lg);
+  margin-bottom: var(--cp-space-xl);
+}
+
+.toc p {
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--cp-space-sm);
+  color: var(--cp-text-muted);
+}
+
+.toc ol {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.toc ol li {
+  margin-bottom: 4px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.toc ol li a {
+  color: var(--cp-text-secondary);
+  text-decoration: none;
+}
+
+.toc ol li a:hover {
+  color: var(--cp-accent);
+}
+
+.toc ol ol {
+  padding-left: 18px;
+  margin-top: 4px;
+}
+
+.toc ol ol li {
+  list-style-type: disc;
+}
+
+/* === Collapsible Details === */
+details {
+  margin-bottom: 12px;
+  border: 1px solid var(--cp-border);
+  border-radius: var(--cp-radius-md);
+  overflow: hidden;
+}
+
+details summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--cp-text);
+  background: #fff;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--cp-space-sm);
+  transition: background 0.15s;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: "\25B6";
+  font-size: 10px;
+  color: var(--cp-text-muted);
+  transition: transform 0.2s;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details summary:hover {
+  background: var(--cp-bg-surface);
+}
+
+details .details-content {
+  padding: 16px;
+  border-top: 1px solid var(--cp-border);
+  background: #fff;
+}
+
+details .details-content p {
+  margin-bottom: 12px;
+}
+
+details .details-content p:last-child {
+  margin-bottom: 0;
+}
+
+details .details-content ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+details .details-content ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+details .details-content li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+/* Nested details */
+details details {
+  margin-top: 12px;
+}
+
+/* === Code === */
+code {
+  background: var(--cp-bg-code);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: var(--cp-font-mono);
+  color: var(--cp-text);
+}
+
+pre {
+  background: var(--cp-bg-code);
+  border: 1px solid var(--cp-border);
+  border-radius: var(--cp-radius-sm);
+  padding: 14px var(--cp-space-md);
+  overflow-x: auto;
+  margin: 12px 0 16px 0;
+  line-height: 1.5;
+  position: relative;
+}
+
+pre .copy-btn {
+  float: right;
+  margin: -6px -8px 4px 8px;
+  background: #fff;
+  border: 1px solid var(--cp-border);
+  border-radius: var(--cp-radius-sm);
+  padding: 2px 10px;
+  font-size: 12px;
+  font-family: var(--cp-font-sans);
+  font-weight: 500;
+  color: var(--cp-text-secondary);
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.15s, color 0.15s;
+}
+
+pre .copy-btn:hover {
+  background: var(--cp-bg-surface);
+  color: var(--cp-text);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: 13px;
+}
+
+/* === Lists (outside details) === */
+ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+
+ul li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+ol {
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+
+ol li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+/* === Page Footer === */
+.page-footer {
+  margin-top: var(--cp-space-2xl);
+  padding-top: var(--cp-space-lg);
+  border-top: 1px solid var(--cp-border);
+  font-size: 14px;
+  color: var(--cp-text-muted);
+}
+
+/* ==========================================================================
+   AI Automates Research — Page-specific styles
+   ========================================================================== */
+
+/* Hero section */
+.air-hero {
+  background: #fff;
+  border: 1px solid var(--cp-border);
+  border-radius: var(--cp-radius-lg);
+  padding: var(--cp-space-lg) 28px;
+  margin-top: var(--cp-space-md);
+  margin-bottom: var(--cp-space-xl);
+}
+
+.air-hero-thesis {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--cp-text);
+  margin-bottom: var(--cp-space-md);
+}
+
+.air-hero-cta {
+  display: inline-block;
+  background: var(--cp-accent);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--cp-radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.air-hero-cta:hover,
+.air-hero-cta:focus {
+  background: var(--cp-accent-hover);
+  color: #fff;
+}
+
+/* Scoreboard table */
+.air-scoreboard {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--cp-space-xl);
+}
+
+.air-scoreboard th {
+  text-align: left;
+  padding: 10px 14px;
+  background: var(--cp-bg-surface);
+  border-bottom: 2px solid var(--cp-border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cp-text);
+}
+
+.air-scoreboard th:first-child,
+.air-scoreboard td:first-child {
+  width: 45%;
+}
+
+.air-scoreboard td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--cp-border);
+  font-size: 14px;
+  color: var(--cp-text);
+}
+
+/* Timeline */
+.air-timeline {
+  position: relative;
+  padding-left: 28px;
+  border-left: 3px solid var(--cp-accent);
+  margin: 20px 0 30px 12px;
+}
+
+.air-timeline-node {
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.air-timeline-node::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 14px;
+  width: 12px;
+  height: 12px;
+  background: var(--cp-accent);
+  border-radius: 50%;
+  border: 2px solid var(--cp-bg);
+  box-shadow: 0 0 0 2px var(--cp-accent);
+}
+
+/* Round date badge */
+.air-round-date {
+  display: inline-block;
+  background: var(--cp-accent-bg);
+  color: var(--cp-accent-hover);
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-right: 6px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Round outcome (visible when collapsed) */
+.air-round-outcome {
+  display: block;
+  font-size: 13px;
+  color: var(--cp-text-secondary);
+  font-weight: 400;
+  margin-top: 4px;
+  padding-left: 19px;
+}
+
+/* Two-column human/AI layout */
+.air-round-cols {
+  display: flex;
+  gap: var(--cp-space-md);
+  margin: 14px 0;
+}
+
+.air-round-human,
+.air-round-ai {
+  flex: 1;
+  padding: 14px;
+  border-radius: var(--cp-radius-md);
+  font-size: 14px;
+}
+
+.air-round-human {
+  background: #fff;
+  border-left: 3px solid var(--cp-accent);
+}
+
+.air-round-ai {
+  background: #f5f5f4;
+  border-left: 3px solid var(--cp-text-secondary);
+}
+
+.air-round-human::before,
+.air-round-ai::before {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.air-round-human::before {
+  content: "Human";
+  color: var(--cp-accent-hover);
+}
+
+.air-round-ai::before {
+  content: "Claude Code";
+  color: var(--cp-text-secondary);
+}
+
+.air-round-human ul,
+.air-round-ai ul {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 0;
+}
+
+.air-round-human li,
+.air-round-ai li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Lesson callout box */
+.air-lesson {
+  background: #fffbeb;
+  border: 1px solid var(--cp-accent);
+  border-left: 4px solid var(--cp-accent);
+  border-radius: var(--cp-radius-sm);
+  padding: 12px var(--cp-space-md);
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--cp-text);
+}
+
+.air-lesson::before {
+  content: "Lesson: ";
+  font-weight: 700;
+  color: var(--cp-accent-hover);
+}
+
+/* PDF link */
+.air-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.air-pdf-link::before {
+  content: "\1F4C4";
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding: var(--cp-space-lg) var(--cp-space-md);
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .topbar {
+    padding: 12px 16px;
+  }
+
+  .cross-nav {
+    flex-wrap: wrap;
+    gap: var(--cp-space-sm);
+  }
+
+  /* AI Research responsive */
+  .air-round-cols {
+    flex-direction: column;
+  }
+
+  .air-timeline {
+    padding-left: 20px;
+    margin-left: 8px;
+  }
+
+  .air-timeline-node::before {
+    left: -28px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .air-hero {
+    padding: 18px 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .topbar-name {
+    font-size: 14px;
+  }
+
+  .air-hero {
+    padding: 14px var(--cp-space-md);
+  }
+
+  .air-hero-thesis {
+    font-size: 15px;
+  }
+
+  .air-round-date {
+    font-size: 11px;
+  }
+
+  .air-round-outcome {
+    font-size: 12px;
+  }
+}
