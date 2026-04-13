@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - How I Use AI as an Economist</title>
+  <link rel="stylesheet" href="../content-page.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Cross-navigation between content pages -->
+    <div class="cross-nav">
+      <span class="active">How I Use AI</span>
+      <a href="../ai-automates-research/">How AI Automates Research</a>
+    </div>
+
+    <h1>How I Use AI as an Economist</h1>
+    <p class="page-subtitle">I believe AI literacy is becoming a fundamental skill in an AI-driven economy. This page documents how I use AI tools in my day-to-day work as an academic economist. I focus on practical tips that I have found genuinely useful.</p>
+    <p class="page-updated">Last updated: April 12, 2026. This page is updated periodically as I learn and experiment with new things. <a href="../uploads/how_i_use_ai.pdf" target="_blank" rel="noopener">Download PDF version</a>.</p>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc">
+      <p>Contents</p>
+      <ol>
+        <li><a href="#general-tips">General Tips (Any AI Tool)</a></li>
+        <li><a href="#claude-code">Claude Code</a>
+          <ol>
+            <li><a href="#getting-started">Getting Started</a></li>
+            <li><a href="#research">Claude Code for Research</a></li>
+            <li><a href="#admin-work">Claude Code for Administrative Work</a></li>
+          </ol>
+        </li>
+        <li><a href="#chat-bot">Chat Bot</a>
+          <ol>
+            <li><a href="#ai-learning">Learning in an AI-Driven Economy</a></li>
+            <li><a href="#brainstorming-research">Brainstorming Research</a></li>
+          </ol>
+        </li>
+        <li><a href="#resources">Resources</a></li>
+      </ol>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 1: GENERAL TIPS -->
+    <!-- ============================================================ -->
+    <h2 id="general-tips">General Tips (Any AI Tool)</h2>
+
+    <details>
+      <summary>Dictation with Wispr Flow</summary>
+      <div class="details-content">
+        <p>Speaking is much faster than typing. I use <a href="https://wisprflow.ai/get-started">Wispr Flow</a>, which transcribes speech in real time. It dramatically speeds up my interaction with AI&mdash;I can dictate a paragraph-long prompt in seconds instead of typing it out.</p>
+        <p><strong>Handling accent and transcription errors.</strong> If you are not a native English speaker, speech-to-text will occasionally mishear words or drop articles. In Claude Code, I solve this with a <em>hook</em>&mdash;a script that runs every time you submit a prompt, telling Claude the input was dictated so it silently corrects artifacts instead of asking for clarification.</p>
+        <p>Save this as <code>~/.claude/hooks/dictation-context.sh</code>:</p>
+<pre><code>#!/bin/bash
+cat &lt;&lt;'EOF'
+DICTATION NOTICE: The user's prompt was likely dictated
+using Wispr Flow (speech-to-text). The user is a native
+Chinese (Mandarin) speaker. The transcription may contain:
+- Homophones or near-homophones (e.g. "EA" &rarr; "it")
+- Misheard technical terms or proper nouns
+- Missing or wrong articles, prepositions, or plurals
+- Run-on sentences or missing punctuation
+
+Mentally correct any likely transcription artifacts and
+interpret the intended meaning. Do not ask for clarification
+on obvious transcription errors &mdash; just fix them silently.
+EOF</code></pre>
+        <p>Then activate it in <code>~/.claude/settings.json</code>:</p>
+<pre><code>{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "command": "$HOME/.claude/hooks/dictation-context.sh"
+      }
+    ]
+  }
+}</code></pre>
+        <p>Adapt the script to your own native language&mdash;just change "Chinese (Mandarin)" and the example error patterns to match your accent.</p>
+      </div>
+    </details>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: CLAUDE CODE -->
+    <!-- ============================================================ -->
+    <h2 id="claude-code">Claude Code</h2>
+    <p><a href="https://code.claude.com/docs/en/overview">Claude Code</a> is a terminal-based AI assistant that can read your files, write code, run commands, and interact with your project directly. Watch <a href="https://youtu.be/HzgByl5ZsWE?si=G06Awdow2xDY8vz2">this video by Paul Goldsmith-Pinkham</a> for a quick introduction, or see the <a href="https://code.claude.com/docs/en/overview">official documentation</a> for installation and a full overview.</p>
+
+    <!-- SUB-SECTION 2.1: GETTING STARTED -->
+    <h3 id="getting-started">Getting Started</h3>
+
+    <details>
+      <summary>My setup: VS Code + Terminal CLI</summary>
+      <div class="details-content">
+        <p>I use Claude Code through the <strong>terminal CLI inside VS Code</strong>:</p>
+        <ul>
+          <li><strong>VS Code</strong> lets me see the folder structure in the sidebar, open files, and track what Claude modifies.</li>
+          <li><strong>The terminal CLI</strong> (run <code>claude</code> in VS Code's integrated terminal) is where I interact with Claude Code. The CLI uses significantly fewer tokens than the VS Code extension or desktop app.</li>
+        </ul>
+        <p>To set this up: open your project folder in VS Code, then open the integrated terminal (<code>Ctrl+`</code>) and type <code>claude</code>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>First thing to do: run <code>/init</code></summary>
+      <div class="details-content">
+        <p>Run <code>/init</code> in any new project. This generates a <code>CLAUDE.md</code> file&mdash;a plain-text briefing sheet describing your project, preferences, and instructions the AI should follow every session. Without it, you re-explain context every time.</p>
+        <p>Example:</p>
+<pre><code># Project: My Research Paper
+
+## What this project is
+Analysis of WWII draft records using Stata and R.
+
+## My preferences
+- Use Stata for data cleaning, R for figures
+- Commit changes with descriptive messages
+- Ask before deleting files
+- I use dictation, so prompts may be conversational</code></pre>
+      </div>
+    </details>
+
+    <!-- SUB-SECTION 2.2: CLAUDE CODE FOR RESEARCH -->
+    <h3 id="research">Claude Code for Research</h3>
+
+    <details>
+      <summary>Treat Claude Code as an RA for your entire life</summary>
+      <div class="details-content">
+        <p>Claude Code combines high execution power (reads files, writes code, runs commands) with high intelligence (reasons, plans, adapts). This makes it a research assistant for <em>anything</em>&mdash;not just coding, but admin, writing, data work, travel logistics.</p>
+        <p><strong>The key insight: even if the first result is mediocre, it is worth teaching Claude Code how to do the task well.</strong> Every skill you build, every memory you save, every line in your <code>CLAUDE.md</code> makes every future session better&mdash;across every project, on every machine, forever. Not sure how to teach it? Just ask:</p>
+<pre><code>I want Claude Code to do [X] better in the future.
+What's the best way to achieve this &mdash; a skill,
+a hook, a memory, a CLAUDE.md entry, or something else?</code></pre>
+      </div>
+    </details>
+
+    <details>
+      <summary>Plan mode for complex tasks</summary>
+      <div class="details-content">
+        <p>For multi-step tasks, start in <em>plan mode</em> (<code>Shift+Tab</code>). Claude Code proposes a structured plan before making changes. You review and approve it first, then it executes. This prevents the AI from charging ahead in the wrong direction.</p>
+<pre><code>I want to restructure this Stata project so that
+each .do file handles one step of the pipeline
+(clean, merge, analyze, figures). Plan this out first.</code></pre>
+      </div>
+    </details>
+
+    <details>
+      <summary>The reflection workflow</summary>
+      <div class="details-content">
+        <p>Perhaps the most powerful technique I have found. When you encounter a new type of task:</p>
+        <ol>
+          <li><strong>Push Claude Code to its best.</strong> Work through the task iteratively.</li>
+          <li><strong>Do not delete the session history.</strong> The full history is essential for what comes next.</li>
+          <li><strong>Ask Claude Code to reflect:</strong></li>
+        </ol>
+<pre><code>Reflect on this entire session. Is there anything you
+should save as a skill, a memory, or a setting change
+so that next time we do this, it goes faster?</code></pre>
+        <p>Claude Code will then create reusable artifacts&mdash;skills, memories, or configuration changes. The first time you do a task with AI might not save time. The second time, it will. For more on creating skills, see <a href="https://x.com/zarazhangrui/status/2033978001126564186">this walkthrough</a>.</p>
+        <p>I have built a dedicated <a href="../skills/reflection.md">reflection skill</a> that automates this process. Install it with:</p>
+<pre><code>mkdir -p ~/.claude/skills/reflection &amp;&amp; \
+curl -o ~/.claude/skills/reflection/SKILL.md \
+  https://gjiang-economics.github.io/skills/reflection.md</code></pre>
+        <p>Then at the end of any session, type <code>/reflection</code>.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Structured workflow with Compound Engineering</summary>
+      <div class="details-content">
+        <p>For non-trivial tasks, I use the <a href="https://every.to/compound-engineering" target="_blank" rel="noopener">Compound Engineering</a> plugin, which structures work into four steps:</p>
+        <ol>
+          <li><strong>Plan</strong> (<code>/ce:plan</code>)&mdash;Scope, decisions, file targets, test scenarios, and risks&mdash;before touching code.</li>
+          <li><strong>Work</strong> (<code>/ce:work</code>)&mdash;Execute the plan systematically.</li>
+          <li><strong>Review</strong> (<code>/ce:review</code>)&mdash;Dispatch independent reviewers that start with a blank slate, catching issues the working agent would rationalize away.</li>
+          <li><strong>Compound</strong> (<code>/ce:compound</code>)&mdash;Document the solution while context is fresh.</li>
+        </ol>
+        <p>The review step is particularly valuable. The agent that built something is the least likely to notice what it missed&mdash;like an author proofreading their own paper.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Cross-model brainstorming</summary>
+      <div class="details-content">
+        <p>When Claude Code struggles with a subtask after a few attempts, try a "second opinion" from another model:</p>
+        <ol>
+          <li>Ask Claude Code to <strong>summarize the situation</strong>: problem, what was tried, what failed.</li>
+          <li>Say: <em>"Give me a self-contained prompt I can paste into Gemini."</em></li>
+          <li>Copy it into <a href="https://gemini.google.com">Gemini</a> (or another AI), then paste the solution back.</li>
+        </ol>
+        <p>Different models have different strengths. Combining them often gets you to a solution faster than pushing a single model repeatedly.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Remote control</summary>
+      <div class="details-content">
+        <p>Claude usage is calculated in <strong>5-hour windows</strong>. If Claude Code pauses for a permission prompt while you are away, those hours are wasted. <em>Remote Control</em> lets you monitor and approve sessions from your phone or any browser via <a href="https://claude.ai/code" target="_blank" rel="noopener">claude.ai/code</a> or the Claude mobile app (<a href="https://apps.apple.com/us/app/claude-by-anthropic/id6473753684" target="_blank" rel="noopener">iOS</a>, <a href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank" rel="noopener">Android</a>).</p>
+<pre><code>/remote-control</code></pre>
+        <p>Or start a new session with: <code>claude --remote-control</code></p>
+        <p><strong>My workflow.</strong> Before leaving the office, I start a long task with <code>/remote-control</code>. On the train home, I check my phone, approve prompts, and review progress. If I know what comes next, I start a second session&mdash;when session one completes, I pick up session two from my phone. See the <a href="https://code.claude.com/docs/en/remote-control" target="_blank" rel="noopener">official documentation</a> for details.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Syncing Claude Code across machines</summary>
+      <div class="details-content">
+        <p>I use Claude Code on a MacBook and a Windows desktop. To keep them identical, I store shared config in Dropbox and symlink from <code>~/.claude/</code>:</p>
+<pre><code>Dropbox/AI_meta/claude-sync/
+|-- memory/        # Your personal AI memory
+|-- skills/        # Custom skills
+|-- commands/      # Custom slash commands
+|-- plugins/       # Plugins
+|-- CLAUDE.md      # Global instructions
+|-- settings.json  # Shared preferences
+|-- .mcp.json      # MCP server config</code></pre>
+        <p><strong>On Mac:</strong></p>
+<pre><code>ln -sf ~/Dropbox/AI_meta/claude-sync/memory   ~/.claude/memory
+ln -sf ~/Dropbox/AI_meta/claude-sync/skills   ~/.claude/skills
+# ... same for each item</code></pre>
+        <p><strong>On Windows</strong> (PowerShell as Administrator):</p>
+<pre><code># Folders -- use Junction
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.claude\memory" `
+  -Target "C:\Users\YOU\Dropbox\AI_meta\claude-sync\memory"
+
+# Files -- use SymbolicLink
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.claude\CLAUDE.md" `
+  -Target "C:\Users\YOU\Dropbox\AI_meta\claude-sync\CLAUDE.md"</code></pre>
+        <p>Machine-specific settings go in <code>settings.local.json</code> and do not sync.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Remove AI-generated writing patterns</summary>
+      <div class="details-content">
+        <p>AI text has telltale patterns&mdash;inflated language, filler phrases, em dashes everywhere. The <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener">humanizer</a> skill detects 29 such patterns and rewrites text to sound natural.</p>
+        <p><strong>Claude Code.</strong> Install and run <code>/humanizer</code>:</p>
+<pre><code>mkdir -p ~/.claude/skills/humanizer &amp;&amp; \
+git clone https://github.com/blader/humanizer.git \
+  ~/.claude/skills/humanizer</code></pre>
+        <p><strong>Claude AI (web) &amp; Claude Desktop.</strong> Create a Project, then paste the <a href="https://github.com/blader/humanizer/blob/main/SKILL.md" target="_blank" rel="noopener">SKILL.md</a> contents into the Project's custom instructions.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Hooks: automatic guardrails and context injection</summary>
+      <div class="details-content">
+        <p>Hooks are shell scripts that Claude Code runs automatically on specific events&mdash;prompt submission, tool execution, file edits. You configure them once and they enforce rules in every session.</p>
+        <ul>
+          <li><strong>Inject context</strong>&mdash;The dictation hook above tells Claude your prompt was speech-to-text.</li>
+          <li><strong>Block dangerous actions</strong>&mdash;Intercept tool calls to prevent force-pushes or unapproved deletions.</li>
+          <li><strong>Automate repetitive steps</strong>&mdash;Run linting or update changelogs automatically.</li>
+        </ul>
+        <p>For a curated collection, see <a href="https://x.com/zodchiii/status/2040000216456143002" target="_blank" rel="noopener">this tweet by @zodchiii</a>. Full documentation: <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">official hooks docs</a>.</p>
+      </div>
+    </details>
+
+    <!-- SUB-SECTION 2.3: ADMINISTRATIVE WORK -->
+    <h3 id="admin-work">Claude Code for Administrative Work</h3>
+
+    <details>
+      <summary>Travel reimbursement</summary>
+      <div class="details-content">
+        <p>After a conference, I use Claude Code to prepare reimbursement documents using a custom <em>skill</em>.</p>
+        <p><strong>Step 1: Organize your folder.</strong></p>
+<pre><code>reimbursement/
+|-- proofs/                        # Receipts and payment evidence
+|   |-- 01 flight receipt.pdf
+|   |-- 01 boarding pass.pdf
+|   |-- 03 hotel invoice.pdf
+|   |-- 06 taxi receipt.pdf
+|   |-- 11 city tax photo.JPG      # Photos of paper receipts work too
+|-- host_reimbursement_policy.pdf   # Instructions from the host
+|-- summary_template.xlsx           # Excel template (if any)</code></pre>
+        <p>Files in <code>proofs/</code> are numbered by item. Files sharing the same prefix (e.g., <code>01</code>) belong to the same expense.</p>
+        <p><strong>Step 2: Install the skill.</strong></p>
+<pre><code>mkdir -p ~/.claude/skills/reimburse-external &amp;&amp; \
+curl -o ~/.claude/skills/reimburse-external/SKILL.md \
+  https://gjiang-economics.github.io/skills/reimburse-external.md</code></pre>
+        <p>The skill walks Claude through a 10-phase workflow: read the host's policy, catalog receipts, verify against rules, calculate the claim with currency conversion, fill in templates, merge receipts into a single PDF, and draft the submission email. <a href="../skills/reimburse-external.md">View the full skill file.</a></p>
+        <p><strong>Step 3: Run it.</strong> Open the reimbursement folder in VS Code and type:</p>
+<pre><code>/reimburse-external</code></pre>
+        <p><strong>Adapting this.</strong> This skill handles <em>external</em> reimbursement (conference hosts, funding bodies). For your university's process, create a separate skill&mdash;ask Claude Code to reflect after your first reimbursement and it will build one tailored to your institution.</p>
+      </div>
+    </details>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: CHAT BOT -->
+    <!-- ============================================================ -->
+    <h2 id="chat-bot">Chat Bot</h2>
+
+    <!-- SUB-SECTION 3.1: LEARNING -->
+    <h3 id="ai-learning">Learning in an AI-Driven Economy</h3>
+
+    <details>
+      <summary>Use AI to design a self-guided study plan</summary>
+      <div class="details-content">
+        <p>Pick a topic you want to learn. Tell the AI your background, available time, and what you want to understand. Ask it to build a study plan&mdash;readings, key ideas, and an order to work through them. As you read, use the AI to ask questions, check your understanding, and explore connections. What used to take days of searching now takes hours.</p>
+        <p>This idea comes from <a href="https://x.com/JesusFerna7026/status/2036162175325065281" target="_blank" rel="noopener">a post by Jes&uacute;s Fern&aacute;ndez-Villaverde</a>, who used AI to design a self-guided study of sociologist Erving Goffman&mdash;and found the experience comparable to a master's-level course week.</p>
+      </div>
+    </details>
+
+    <!-- SUB-SECTION 3.2: BRAINSTORMING -->
+    <h3 id="brainstorming-research">Brainstorming Research</h3>
+
+    <details>
+      <summary>Avoid sycophancy</summary>
+      <div class="details-content">
+        <p>AI chatbots trained with RLHF tend to be <em>sycophantic</em>&mdash;they default to agreement rather than honest critique. This is counterproductive when brainstorming research ideas.</p>
+        <p><strong>The fix (Claude).</strong> Go to <strong>Settings &rarr; General &rarr; "What personal preferences should Claude consider in responses?"</strong> and add:</p>
+<pre><code>Be direct and honest. Don't default to agreement
+or flattery: I prefer candid feedback, especially
+on my research.</code></pre>
+        <p>This overrides the default tendency at the preference level, so every conversation starts candid rather than agreeable.</p>
+      </div>
+    </details>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: RESOURCES -->
+    <!-- ============================================================ -->
+    <h2 id="resources">Resources</h2>
+    <ul>
+      <li>In Claude Code CLI, type <code>/powerup</code></li>
+      <li><a href="https://claudeblattman.com/" target="_blank" rel="noopener">Claude Blattman</a></li>
+      <li><a href="https://youtu.be/HzgByl5ZsWE?si=sZkb5rhR3_ZZ_Rl8" target="_blank" rel="noopener">Paul Goldsmith-Pinkham</a> at Markus Academy</li>
+      <li><a href="https://www.youtube.com/live/YPv9BqweQIo?si=N6scioKEQ-6PD3Ro" target="_blank" rel="noopener">Aniket Panjwani</a> at VoxDev, and his <a href="https://youtu.be/HR1lI4V0oKE?si=LiSZxEkpE4vxAMX4" target="_blank" rel="noopener">YouTube channel</a></li>
+      <li><a href="https://github.com/hanlulong/awesome-ai-for-economists" target="_blank" rel="noopener">awesome-ai-for-economists</a></li>
+    </ul>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../index.html">&larr; Back to homepage</a></p>
+    </div>
+
+  </main>
+
+  <script src="../script.js?v=3"></script>
+</body>
+</html>
