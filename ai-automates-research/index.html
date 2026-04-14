@@ -29,7 +29,7 @@
     <!-- HERO -->
     <div class="air-hero">
       <p class="air-hero-thesis">I proposed a research question&mdash;<em>did immigration affect house prices during the Age of Mass Migration?</em>&mdash;and asked <a href="https://code.claude.com/docs/en/overview">Claude Code</a> to execute the entire research pipeline: combining datasets, constructing instruments, digitizing archives, running regressions, and writing progress reports. This page documents what happened, round by round.</p>
-      <a class="air-hero-cta" href="../uploads/progress_report_07.pdf" target="_blank" rel="noopener">Latest progress report (PDF)</a>
+      <a class="air-hero-cta" href="../uploads/research_spec.md" target="_blank" rel="noopener">Latest research design spec</a>
     </div>
 
     <!-- TOC -->
@@ -47,6 +47,7 @@
             <li><a href="#round5">Round 5: Gemini Vision API</a></li>
             <li><a href="#round6">Round 6: Clean Rebuild</a></li>
             <li><a href="#round7">Round 7: Data Validation</a></li>
+            <li><a href="#round8">Round 8: Research Reset</a></li>
           </ol>
         </li>
         <li><a href="#takeaways">Overall Takeaways</a></li>
@@ -57,13 +58,14 @@
     <h3>At a glance</h3>
     <table class="air-scoreboard">
       <tr><th>Metric</th><th>Value</th></tr>
-      <tr><td>Rounds completed</td><td>7</td></tr>
-      <tr><td>Calendar days</td><td>17 (Mar 24 &ndash; Apr 9, 2026)</td></tr>
+      <tr><td>Rounds completed</td><td>8</td></tr>
+      <tr><td>Calendar days</td><td>21 (Mar 24 &ndash; Apr 14, 2026)</td></tr>
       <tr><td>Observations built</td><td>78 &rarr; 461 (city-year panel)</td></tr>
       <tr><td>AI bugs caught by human</td><td>7 (1 pandas, 4 pipeline audit, 2 crosswalk)</td></tr>
       <tr><td>AI failures</td><td>1 (Tesseract OCR: 26% accuracy)</td></tr>
       <tr><td>Human thinking saved AI effort</td><td>2 rounds (found downloadable Excel online)</td></tr>
-      <tr><td>Progress reports produced by AI</td><td>5</td></tr>
+      <tr><td>Progress reports produced by AI</td><td>5 + 1 research design spec</td></tr>
+      <tr><td>Claude Code skills created</td><td>2 (<a href="../skills/research-spec.md">research-spec</a>, <a href="../skills/research-reset.md">research-reset</a>)</td></tr>
     </table>
 
     <!-- ============================================================ -->
@@ -409,6 +411,59 @@
         </details>
       </div>
 
+      <!-- ==================== ROUND 8 ==================== -->
+      <div class="air-timeline-node">
+        <details class="air-round" id="round8">
+          <summary>
+            <span class="air-round-date">Apr 14</span>
+            Round 8: Research Reset &mdash; Specification &amp; Skills
+            <span class="air-round-outcome">No new analysis. Formalized the research design into an authoritative spec. Created two reusable Claude Code skills.</span>
+          </summary>
+          <div class="details-content">
+
+            <div class="air-round-cols">
+              <div class="air-round-human">
+                <ul>
+                  <li>Answered three rounds of structured interview questions defining the research design</li>
+                  <li>Corrected the instrument definition: the shift-share instrument must sum national flows over the same rolling k-year window as the endogenous variable</li>
+                  <li>Added a 10-year immigration window (k=10) as a robustness check alongside the baseline 5-year window</li>
+                  <li>Decided to separate operational conventions (CLAUDE.md) from research design decisions (spec)</li>
+                </ul>
+              </div>
+              <div class="air-round-ai">
+                <ul>
+                  <li>Conducted a structured interview following the <code>/research-spec</code> skill protocol</li>
+                  <li>Assembled answers into a formal spec with equation notation and data mappings</li>
+                  <li>Ran a coherence review that identified 8 issues&mdash;mostly redundant definitions across sections</li>
+                  <li>Revised the spec to consolidate: YRIMMIG rule appears once with a table, k-window defined once, crosswalks clearly labelled</li>
+                  <li>Cleaned CLAUDE.md: removed duplicated research design content, replaced with pointers to the spec</li>
+                </ul>
+              </div>
+            </div>
+
+            <p><strong>Why a reset?</strong> After 7 rounds of iterative work, the research design was scattered across three places: CLAUDE.md (operational rules), the research log (historical decisions), and code comments. Bugs had accumulated silently across rounds&mdash;7 were caught, but each round&rsquo;s context carried forward the errors of previous rounds. The spec consolidates the <em>current</em> design into one authoritative document written at the methods-section level, so future sessions start clean.</p>
+
+            <p><strong>Output:</strong> A <a href="../uploads/research_spec.md" target="_blank" rel="noopener">research design specification</a> covering: research question, identification strategy, variable definitions (with equations), data sources, regression specifications, sample restrictions, and key methodological decisions. Placeholder sections remain for mechanism, contribution, and identifying assumptions.</p>
+
+            <div class="air-lesson">As rounds of AI-driven experimentation accumulate, you learn more&mdash;but mistakes also accumulate in the project&rsquo;s context. Each session inherits the scattered decisions, stale rules, and silent bugs of every previous session. At some point, it pays to stop iterating and deliberately reset: formalize what you know into a clean specification, archive the messy history, and give future sessions a fresh foundation. This is not wasted time&mdash;it is infrastructure that makes every subsequent round more productive.</div>
+
+            <p><strong>Skills created in this round:</strong> Two reusable Claude Code skills for managing research projects. Install them with:</p>
+
+<pre><code>mkdir -p ~/.claude/skills/research-spec &amp;&amp; \
+curl -o ~/.claude/skills/research-spec/SKILL.md \
+  https://gjiang-economics.github.io/skills/research-spec.md</code></pre>
+
+<pre><code>mkdir -p ~/.claude/skills/research-reset &amp;&amp; \
+curl -o ~/.claude/skills/research-reset/SKILL.md \
+  https://gjiang-economics.github.io/skills/research-reset.md</code></pre>
+
+            <p><a href="../skills/research-spec.md">View research-spec skill</a> &mdash; Structured interview to create a formal research design specification.<br>
+            <a href="../skills/research-reset.md">View research-reset skill</a> &mdash; Archive legacy artifacts and clean the project for a fresh round of spec-driven execution.</p>
+
+          </div>
+        </details>
+      </div>
+
       <!-- ADD NEW ROUND HERE -->
 
     </div><!-- /air-timeline -->
@@ -418,7 +473,7 @@
     <!-- ============================================================ -->
     <h2 id="takeaways">Overall Takeaways</h2>
 
-    <p>Seven rounds in, here is what I have learned about using AI to automate research execution:</p>
+    <p>Eight rounds in, here is what I have learned about using AI to automate research execution:</p>
 
     <div class="air-lesson">AI executes research pipelines well&mdash;but humans must verify data quality. Claude Code built 25+ scripts, processed 320M Census records, and produced four progress reports. But it also introduced a silent pandas bug that made the first stage collapse, and its OCR digitization was unreliable. The human role is not just to direct&mdash;it is to <strong>design how to verify</strong>. (For how I automated verification, see <a href="../how-i-use-ai/">How I Use AI</a>.)</div>
 
@@ -430,9 +485,11 @@
 
     <div class="air-lesson">In any micro-project, there are always vulnerable or weak links in the data pipeline. It is worth starting a separate session specifically to find and stress-test the weakest link. In Round 7, the weakest links turned out to be fine&mdash;but the process of testing them uncovered two real bugs that would have gone unnoticed otherwise.</div>
 
+    <div class="air-lesson">Know when to stop iterating and reset. After many rounds of AI-driven exploration, you will know more than when you started&mdash;but mistakes and scattered decisions also accumulate in the project&rsquo;s context. Each new session inherits the stale rules and silent bugs of every previous one. Periodically, it pays to step back, formalize what you have learned into a clean specification, and give future sessions a fresh starting point. Round 8 produced no new results, but it made every future round more productive.</div>
+
     <!-- FOOTER -->
     <div class="page-footer">
-      <p>This page will be updated as the experiment continues. Last updated: April 9, 2026.</p>
+      <p>This page will be updated as the experiment continues. Last updated: April 14, 2026.</p>
       <p style="margin-top: 8px;"><a href="../index.html">&larr; Back to homepage</a></p>
     </div>
 
