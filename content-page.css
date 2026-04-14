@@ -402,6 +402,109 @@ ol li {
 }
 
 /* ==========================================================================
+   How I Use AI — Dispatch cards, principles list, section intros
+   ========================================================================== */
+
+.section-intro {
+  color: var(--cp-text-secondary);
+  font-style: italic;
+  margin-bottom: var(--cp-space-md);
+}
+
+.principles-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: var(--cp-space-lg);
+}
+
+.principles-list li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--cp-border-light);
+  line-height: 1.65;
+}
+
+.principles-list li:last-child {
+  border-bottom: none;
+}
+
+.principles-list strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--cp-text);
+}
+
+/* Dispatch cards */
+.dispatch-card {
+  margin-bottom: var(--cp-space-md);
+}
+
+.dispatch-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 13px;
+  margin-bottom: 6px;
+  font-family: var(--cp-font-mono);
+}
+
+.dispatch-num {
+  color: var(--cp-accent);
+  font-weight: 600;
+}
+
+.dispatch-date {
+  color: var(--cp-text-muted);
+}
+
+/* Linked (own-page) dispatch: no <details>, shows title + teaser + read link */
+.dispatch-card--linked {
+  border: 1px solid var(--cp-border);
+  border-radius: var(--cp-radius-md);
+  padding: 16px 18px;
+  background: #fff;
+}
+
+.dispatch-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.dispatch-title a {
+  color: var(--cp-text);
+  text-decoration: none;
+}
+
+.dispatch-title a:hover {
+  color: var(--cp-accent);
+}
+
+.dispatch-teaser {
+  color: var(--cp-text-secondary);
+  margin-bottom: 10px;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.dispatch-read-link {
+  margin-bottom: 0;
+}
+
+.dispatch-read-link a {
+  color: var(--cp-accent);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.dispatch-read-link a:hover {
+  color: var(--cp-accent-hover);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
    AI Automates Research — Page-specific styles
    ========================================================================== */
 

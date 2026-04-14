@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #9 - Compound Engineering</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #9</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#9</span>
+      <span class="dispatch-date">Updated April 14, 2026</span>
+    </p>
+    <h1>Compound Engineering: a workflow for research projects</h1>
+    <p class="page-subtitle">Four commands &mdash; <code>/ce:brainstorm</code>, <code>/ce:plan</code>, <code>/ce:work</code>, <code>/ce:review</code> &mdash; turn a drifting AI session into a structured workflow. This dispatch walks through what each one does, how they chain together on a real research task, and when to use or skip the whole thing.</p>
+
+    <!-- ================= What it is ================= -->
+    <h2 id="what">What it is, and why I use it</h2>
+    <p><a href="https://every.to/compound-engineering" target="_blank" rel="noopener">Compound Engineering</a> (CE) is a Claude Code plugin that wraps a software-engineering workflow around any non-trivial task. Instead of typing prompts and hoping the agent stays on track, you run the task through four stages: <em>brainstorm</em>, <em>plan</em>, <em>work</em>, and <em>review</em>. Each stage produces a durable artifact &mdash; a requirements document, an implementation plan, committed code, a review report &mdash; that the next stage builds on.</p>
+    <p>For research projects, this matters because the work spans weeks or months. A single long session drifts. A fresh session starts without context. CE forces the context to live in files on disk, not in the model's head, so the work survives session boundaries and is auditable after the fact.</p>
+    <p>The stage I care about most is <strong>review</strong>. The agent that wrote the code is the least likely to notice what it missed &mdash; like an author proofreading their own paper. CE dispatches a second agent with a blank slate, and that agent routinely catches things the building agent rationalized away.</p>
+
+    <!-- ================= Setup ================= -->
+    <h2 id="setup">Setup</h2>
+    <p>Install the plugin once. From a Claude Code session:</p>
+<pre><code>/plugin marketplace add every-inc/every-marketplace
+/plugin install compound-engineering@every-marketplace</code></pre>
+    <p>After restart, the four commands become available as <code>/ce:brainstorm</code>, <code>/ce:plan</code>, <code>/ce:work</code>, and <code>/ce:review</code>. Artifacts land in <code>docs/brainstorms/</code> and <code>docs/plans/</code>.</p>
+
+    <!-- ================= The four commands ================= -->
+    <h2 id="brainstorm">1. Brainstorm &mdash; <code>/ce:brainstorm</code></h2>
+    <p><strong>What it does.</strong> Collaborative dialogue to answer <em>what to build</em>. The agent asks one question at a time, challenges assumptions, and proposes 2&ndash;3 concrete approaches with tradeoffs. Output: a requirements document in <code>docs/brainstorms/</code> that captures the problem frame, scope boundaries, and success criteria.</p>
+    <p><strong>When to use it.</strong> The request is vague ("reorganize my website"), the scope is unclear, or multiple plausible directions exist. Skip when the request is already specific and you know exactly what needs to happen.</p>
+    <p><strong>Example prompt:</strong></p>
+<pre><code>/ce:brainstorm I want to reorganize my How-I-Use-AI
+page. The current layout is messy. I think a blog-style
+dispatches format might work better, but I'm open.</code></pre>
+
+    <h2 id="plan">2. Plan &mdash; <code>/ce:plan</code></h2>
+    <p><strong>What it does.</strong> Turns the requirements doc into an implementation plan. Each unit has a goal, file list, approach, test scenarios, and verification criteria. Output: a plan file in <code>docs/plans/YYYY-MM-DD-NNN-...-plan.md</code> with checkbox-tracked implementation units.</p>
+    <p><strong>When to use it.</strong> The <em>what</em> is settled; now you need the <em>how</em>. Especially valuable when work spans multiple files or has dependency ordering.</p>
+    <p><strong>Note on plan mode.</strong> Claude Code's built-in plan mode (<code>Shift+Tab</code>) is lighter-weight &mdash; it proposes a plan in-session without writing a file. Use it for single-session tasks; use <code>/ce:plan</code> when the plan needs to outlive the session.</p>
+
+    <h2 id="work">3. Work &mdash; <code>/ce:work</code></h2>
+    <p><strong>What it does.</strong> Executes the plan systematically. Creates a feature branch (or worktree), builds a task list from the plan's implementation units, and works through them with tests and incremental commits. Output: the actual code changes, committed.</p>
+    <p><strong>What I watch for.</strong> The work phase is where drift happens if the plan is weak. If <code>/ce:work</code> starts asking lots of clarifying questions mid-implementation, that's a signal to stop and tighten the plan first. Pausing to fix the plan is almost always faster than pushing through on a shaky one.</p>
+
+    <h2 id="review">4. Review &mdash; <code>/ce:review</code></h2>
+    <p><strong>What it does.</strong> Dispatches independent reviewer agents, each starting with a blank slate, to audit the diff against the plan, the codebase conventions, and explicit quality criteria (correctness, security, performance, tests, maintainability). Output: a review report with findings graded by severity.</p>
+    <p><strong>Why this is the most valuable stage.</strong> The building agent is invested in its own solution. A fresh agent doesn't know what you tried and rejected; it just sees the code as a reader would. In my experience, most of the useful catches happen here &mdash; missed edge cases, convention drift, tests that mock too much, dead code the building agent forgot to remove.</p>
+
+    <!-- ================= How they chain ================= -->
+    <h2 id="chain">How they chain in practice</h2>
+    <p>A typical research-adjacent task, start to finish:</p>
+    <ol>
+      <li>I start with a vague itch (<em>"my website section on AI is badly organized"</em>) and run <code>/ce:brainstorm</code>. After ten or so exchanges, I have a requirements doc that says: move to a Principles + Dispatches structure, drop beginner content, and migrate existing tricks.</li>
+      <li>I run <code>/ce:plan</code> on that doc. The plan file lists five implementation units: confirm dispatch lineup, rewrite hub, create sub-page for the first dispatch, rewrite the LaTeX mirror, deploy. Each unit names specific files.</li>
+      <li>I run <code>/ce:work</code>. The agent creates a feature branch and works through the plan. I'm still in the loop &mdash; I confirm the dispatch lineup interactively, spot-check the rendered page, approve the deploy &mdash; but the agent is driving.</li>
+      <li>Before merging, I run <code>/ce:review</code>. The reviewer catches, say, three things the building agent missed: a broken relative path, a dispatch that still contains a beginner-framed sentence, and a LaTeX section I forgot to update.</li>
+      <li>I fix the review findings, then merge.</li>
+    </ol>
+    <p>The whole cycle &mdash; brainstorm through review &mdash; for this kind of task takes half a day. Without CE I would have spent the same half-day, but with more rewriting and less confidence that I caught the rough edges.</p>
+
+    <!-- ================= When to skip ================= -->
+    <h2 id="skip">When to skip or shortcut</h2>
+    <p>CE is overkill for small tasks. Rough rules:</p>
+    <ul>
+      <li><strong>Skip brainstorm</strong> when you already know exactly what to build. Go straight to <code>/ce:plan</code> or just describe the change to Claude Code directly.</li>
+      <li><strong>Skip plan</strong> when the work is under roughly three files and the approach is obvious. Direct execution is fine.</li>
+      <li><strong>Never skip review</strong> for anything that matters. Running <code>/ce:review</code> on a diff is cheap &mdash; a few minutes &mdash; and the catches pay for it.</li>
+      <li><strong>Skip the whole thing</strong> for trivial edits (typo fixes, single-line config changes, adding a reference to a bib file). The ceremony costs more than it saves.</li>
+    </ul>
+    <p>I lean on CE most heavily for work that (a) touches more than a handful of files, (b) spans multiple sessions, or (c) has non-obvious design decisions that I want captured in writing so future-me or a co-author can follow along.</p>
+
+    <!-- ================= Links ================= -->
+    <h2 id="links">Further reading</h2>
+    <ul>
+      <li><a href="https://every.to/compound-engineering" target="_blank" rel="noopener">Compound Engineering</a> &mdash; the plugin homepage and philosophy.</li>
+      <li>This dispatch will grow as I use CE more. Expect sub-dispatches on specific stages in coming updates.</li>
+    </ul>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>
