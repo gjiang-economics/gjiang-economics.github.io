@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #10 - Context Management in Claude Code</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #10</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#10</span>
+      <span class="dispatch-date">Updated April 16, 2026</span>
+    </p>
+    <h1>Context management in Claude Code: when to continue, compact, or start fresh</h1>
+    <p class="page-subtitle">Even on the Max plan, long sessions routinely hit usage limits. Most consumption comes from a handful of very long context windows, not many short ones. Here is how I think about managing context &mdash; and the framework Anthropic published for doing it systematically.</p>
+
+    <!-- ================= Personal experience ================= -->
+    <h2 id="experience">The usage problem in practice</h2>
+    <p>I am on Claude's Max plan, which gives a generous monthly allowance. For most of the month, I barely notice the limit. Then, in the space of a day or two, I burn through a large chunk of it. The culprit is always the same: one or two sessions where I kept going long past the point of diminishing returns, accumulating context until the conversation window was enormous.</p>
+    <p>The screenshot below shows what this looks like in the usage dashboard. A small number of long-context sessions account for most of the consumption. Short focused sessions barely register.</p>
+
+    <img src="context-usage.jpg"
+         alt="Claude usage dashboard showing a few long-context sessions consuming most of the monthly allowance"
+         style="max-width:100%;border-radius:6px;border:1px solid #e7e5e4;margin:12px 0 16px 0;">
+    <p style="font-size:0.875rem;color:#78716c;margin-top:-8px;">Usage dashboard: a handful of long sessions dominate monthly consumption.</p>
+
+    <p>This is not just a cost issue. Model reasoning quality degrades as the context window fills. The model has to attend over more tokens, older context gets diluted, and the assistant starts making mistakes it would never make in a fresh session. Long context hurts output quality as much as it hurts your usage balance.</p>
+
+    <!-- ================= Anthropic guide ================= -->
+    <h2 id="guide">The Anthropic session management guide</h2>
+    <p>Anthropic published a practical blog post on exactly this problem: <a href="https://claude.com/blog/using-claude-code-session-management-and-1m-context" target="_blank" rel="noopener">Using Claude Code: session management and 1M context</a>. I recommend reading it. It covers four strategies &mdash; continue, compact (<code>/compact</code>), start fresh, and spin off sub-agents &mdash; with concrete guidance on when each one applies.</p>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>
