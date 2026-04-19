@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #11 - Silencing Claude Code permission prompts</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #11</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#11</span>
+      <span class="dispatch-date">Updated April 19, 2026</span>
+    </p>
+    <h1>Annoyed by Claude Code permission prompts? Read this.</h1>
+    <p class="page-subtitle">We want Claude Code to act as an autonomous agent &mdash; go off, refactor a pipeline, run a long analysis, iterate on a benchmark. In practice it interrupts every few seconds asking for permission to run this bash command or that MCP tool. Two recent features let you stop babysitting without reaching for <code>--dangerously-skip-permissions</code>.</p>
+
+    <!-- ================= The annoyance ================= -->
+    <h2 id="annoyance">The annoyance</h2>
+    <p>Start a long task, walk away, come back ten minutes later, and find Claude Code stopped on the first unfamiliar command waiting for you to click approve. Run two sessions in parallel and the problem doubles. The old workaround &mdash; <code>--dangerously-skip-permissions</code> &mdash; removes the safety net entirely, which I am not comfortable with for research data and git operations. There are now two better options.</p>
+
+    <!-- ================= Fix 1: Auto mode ================= -->
+    <h2 id="auto-mode">Fix 1: Auto mode</h2>
+    <p>Auto mode routes every permission prompt through a model-based classifier that decides whether the command is safe. Safe commands are auto-approved; genuinely risky ones (destructive git, production writes, unfamiliar network calls) still surface to you. Safer than <code>--dangerously-skip-permissions</code>, because the classifier is actually reading the tool call.</p>
+    <p><strong>Availability.</strong> Opus 4.7, for Max / Teams / Enterprise users.</p>
+    <p><strong>How to turn it on.</strong></p>
+    <ul>
+      <li>In the CLI, press <code>Shift+Tab</code> to cycle into auto mode.</li>
+      <li>In Claude Desktop or the VSCode extension, pick auto mode from the mode dropdown.</li>
+    </ul>
+    <p>The practical win is being able to <em>run several Claudes in parallel</em>. Once one is cooking, switch to the next, and let the classifier handle routine approvals in the background.</p>
+
+    <!-- ================= Fix 2: Skill ================= -->
+    <h2 id="fewer-prompts-skill">Fix 2: The <code>/fewer-permission-prompts</code> skill</h2>
+    <p>Complementary to auto mode. This skill scans your session history, finds bash and MCP commands that are clearly safe but caused repeated prompts (think <code>ls</code>, <code>git status</code>, <code>bq show</code>, specific MCP tools you use every day), and recommends a prioritized allowlist to paste into <code>~/.claude/settings.json</code> (or the project-level <code>.claude/settings.json</code>).</p>
+    <p>Run it from any Claude Code session:</p>
+<pre><code>/fewer-permission-prompts</code></pre>
+    <p>Think of it as a one-time tuning pass you repeat every few weeks as your tool use evolves. Official reference: <a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">Claude Code &mdash; Configure permissions</a>.</p>
+
+    <!-- ================= When I reach for each ================= -->
+    <h2 id="when">When I reach for each</h2>
+    <ul>
+      <li><strong>Auto mode</strong> &mdash; for long or parallel autonomous runs: deep refactors, multi-step research pipelines, anything I want to step away from. Temporary, per-session.</li>
+      <li><strong><code>/fewer-permission-prompts</code></strong> &mdash; whenever I notice the same prompts recurring in normal work. It updates <code>settings.json</code>, so the effect is permanent and machine-specific.</li>
+    </ul>
+    <p>In combination: auto mode handles the long tail during a specific autonomous run; the skill permanently clears the routine ones so even non-auto sessions stay smooth.</p>
+
+    <!-- ================= Source ================= -->
+    <h2 id="source">Source</h2>
+    <p>Both features are described by Boris Cherny (Anthropic) in <a href="https://x.com/bcherny/status/2044847849662505288?s=20" target="_blank" rel="noopener">this thread on X</a>.</p>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>
