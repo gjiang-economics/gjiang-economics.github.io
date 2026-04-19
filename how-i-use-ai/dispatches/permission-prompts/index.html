@@ -38,7 +38,6 @@
     <!-- ================= Fix 1: Auto mode ================= -->
     <h2 id="auto-mode">Fix 1: Auto mode</h2>
     <p>Auto mode routes every permission prompt through a model-based classifier that decides whether the command is safe. Safe commands are auto-approved; genuinely risky ones (destructive git, production writes, unfamiliar network calls) still surface to you. Safer than <code>--dangerously-skip-permissions</code>, because the classifier is actually reading the tool call.</p>
-    <p><strong>Availability.</strong> Opus 4.7, for Max / Teams / Enterprise users.</p>
     <p><strong>How to turn it on.</strong></p>
     <ul>
       <li>In the CLI, press <code>Shift+Tab</code> to cycle into auto mode.</li>
@@ -52,14 +51,6 @@
     <p>Run it from any Claude Code session:</p>
 <pre><code>/fewer-permission-prompts</code></pre>
     <p>Think of it as a one-time tuning pass you repeat every few weeks as your tool use evolves. Official reference: <a href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">Claude Code &mdash; Configure permissions</a>.</p>
-
-    <!-- ================= When I reach for each ================= -->
-    <h2 id="when">When I reach for each</h2>
-    <ul>
-      <li><strong>Auto mode</strong> &mdash; for long or parallel autonomous runs: deep refactors, multi-step research pipelines, anything I want to step away from. Temporary, per-session.</li>
-      <li><strong><code>/fewer-permission-prompts</code></strong> &mdash; whenever I notice the same prompts recurring in normal work. It updates <code>settings.json</code>, so the effect is permanent and machine-specific.</li>
-    </ul>
-    <p>In combination: auto mode handles the long tail during a specific autonomous run; the skill permanently clears the routine ones so even non-auto sessions stay smooth.</p>
 
     <!-- ================= Source ================= -->
     <h2 id="source">Source</h2>
