@@ -39,34 +39,29 @@
       <li><strong>Review the execution</strong> when the work is cheap to replicate. Local data cleaning, analysis scripts, website edits, small refactors. Let the agent try, then attack the diff.</li>
       <li><strong>Both</strong> is always safe. Default to both when the task is unfamiliar or the blast radius is unclear.</li>
     </ul>
-    <p>The mechanism is the same in each case: after Claude Code finishes a step (a plan, or a batch of edits), it asks <em>"Would you like to proceed?"</em> with four options. <strong>Pick option 4 &mdash; "Tell Claude what to change"</strong> &mdash; and type a review command as the feedback. Claude then runs the review instead of proceeding, and comes back with the results for you to absorb.</p>
+    <p>The mechanism is the same in each case: after Claude Code returns a plan in Plan Mode, it asks <em>"Would you like to proceed?"</em> with four options. <strong>Pick option 4 &mdash; "Tell Claude what to change"</strong> &mdash; and type a review command as the feedback. Claude then runs the review instead of proceeding, and comes back with the results for you to absorb.</p>
 
     <img src="proceed-prompt-option-4.jpg" alt="Claude Code's 'Would you like to proceed?' prompt with option 4 highlighted" style="max-width:100%;border-radius:6px;border:1px solid #e7e5e4;margin:12px 0 16px 0;">
-    <p style="font-size:0.875rem;color:#78716c;margin-top:-8px;">Claude Code's approval prompt after plan mode. Pick option 4 &mdash; "Tell Claude what to change" &mdash; and type a review command as the feedback (<code>shift+tab</code> confirms).</p>
+    <p style="font-size:0.875rem;color:#78716c;margin-top:-8px;">Claude Code's approval prompt after plan mode. Pick option 4 &mdash; "Tell Claude what to change" &mdash; and type a review command as the feedback.</p>
 
     <!-- ================= Reviewing the plan ================= -->
     <h2 id="plan-review">Reviewing the plan</h2>
     <p>When Claude finishes planning, it calls <code>ExitPlanMode</code> and the four-option prompt above appears. This is the moment to review.</p>
-    <p><strong>Pick option 4.</strong> Do not pick 1, 2, or 3 yet. As the feedback, type:</p>
-<pre><code>/document-review</code></pre>
-    <p>Or, to be explicit about what you want:</p>
+    <p><strong>Pick option 4.</strong> Do not pick 1, 2, or 3 yet. As the feedback, type something like:</p>
 <pre><code>run /document-review on the plan first, absorb the comments,
 update the plan, then stop and ask me again</code></pre>
-    <p><code>/document-review</code> comes from the <a href="https://every.to/compound-engineering" target="_blank" rel="noopener">Compound Engineering</a> plugin. It spawns parallel persona reviewers against the plan file on disk &mdash; a feasibility lens, a scope lens, a security lens, and others &mdash; each returning comments from a blank slate. Read the comments, tell Claude which ones to absorb, and let it rewrite the plan.</p>
+    <p><code>/document-review</code> comes from the <a href="https://every.to/compound-engineering" target="_blank" rel="noopener">Compound Engineering</a> plugin. It spawns parallel persona reviewers against the plan file on disk &mdash; a feasibility lens, a scope lens, a security lens, and others &mdash; each returning comments from a blank slate.</p>
     <p>Re-approve with option 1 or 2 when you are satisfied. Only then does execution begin.</p>
 
     <!-- ================= Reviewing the execution ================= -->
     <h2 id="execution-review">Reviewing the execution</h2>
-    <p>For execution review, bake the review step <em>into</em> the plan during planning, not after the run. Add a final task to the plan that reads something like:</p>
-<pre><code>Before reporting done: run /codex:adversarial-review (or /ce:review)
-on the full diff. Absorb the comments. Fix the affected code.
-Re-run the pipeline step that changed.</code></pre>
-    <p>Two review commands to pick from at the end of execution:</p>
-<pre><code>/codex:adversarial-review</code></pre>
-    <p><code>/codex:adversarial-review</code> delegates the review to a Codex-powered model &mdash; a genuinely different brain reading the diff with no knowledge of how it was built. I reach for this when I want the strongest blank-slate critique.</p>
-<pre><code>/ce:review</code></pre>
-    <p><code>/ce:review</code> runs Compound Engineering's tiered multi-persona review locally &mdash; correctness, maintainability, testing, and any conditional personas the diff triggers (security, data migrations, API contracts, etc.). Same "second agent with a blank slate" idea as <code>/document-review</code>, but pointed at code instead of prose.</p>
-    <p>If you forgot to bake the review into the plan, you can still intercept: when the post-execution "Would you like to proceed?" prompt appears, use option 4 and type the review command there. Read the review, feed the important findings back to Claude, and re-run the affected pipeline step.</p>
+    <p>The trick for execution review is to bake it <em>into</em> the plan during planning, not after. While you are still on the first "Would you like to proceed?" prompt after plan mode, pick option 4 and type something like:</p>
+<pre><code>add a final step to the plan: run /codex:adversarial-review
+(or /ce:review) on the full diff at the end, absorb the
+comments, fix the affected code, and re-run the pipeline step
+that changed</code></pre>
+    <p>Claude Code rewrites the plan to include the review, then asks you to approve again. From that point the review runs automatically as the last step of execution &mdash; you do not have to remember to trigger it.</p>
+    <p><strong>The two review commands.</strong> <code>/codex:adversarial-review</code> delegates the review to a Codex-powered model &mdash; a genuinely different brain reading the diff with no knowledge of how it was built. I reach for this when I want the strongest blank-slate critique. <code>/ce:review</code> runs Compound Engineering's tiered multi-persona review locally &mdash; correctness, maintainability, testing, plus conditional personas the diff triggers (security, data migrations, API contracts). Same "second agent with a blank slate" idea as <code>/document-review</code>, pointed at code instead of prose.</p>
 
     <!-- ================= Source ================= -->
     <h2 id="source">Source</h2>
