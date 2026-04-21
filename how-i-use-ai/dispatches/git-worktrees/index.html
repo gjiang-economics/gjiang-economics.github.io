@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #13 - Git worktrees in Claude Code</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #13</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#13</span>
+      <span class="dispatch-date">Updated April 21, 2026</span>
+    </p>
+    <h1>Git worktrees in Claude Code: keep <code>main</code> clean, run agents in parallel</h1>
+    <p class="page-subtitle">Research runs for months, most trials fail, and parallel agents on the same working tree step on each other's files. One flag &mdash; <code>claude -w &lt;name&gt;</code> &mdash; fixes both problems at once.</p>
+
+    <!-- ================= The problem ================= -->
+    <h2 id="problem">The problem</h2>
+    <p>An empirical project is not a one-shot game. A single classification task, a single regression, a single data pull can stretch across months, and most attempts along the way fail. Out of seven trials, maybe two survive into the polished paper.</p>
+    <p>The naive workflow is to keep everything on <code>main</code> and dump every session's log into a single <code>progress.md</code>. That holds up for a week. By session fifteen, <code>progress.md</code> is a graveyard of abandoned ideas &mdash; and Claude Code re-reads it on every new session. Old, dead context pollutes the next decision: the model keeps referencing approaches you already discarded, suggests fixes for problems that no longer exist, and drifts back toward work you have already ruled out.</p>
+    <p>There is a second problem. Claude Code is at its best when you run agents <em>in parallel</em> &mdash; one training a classifier while another cleans the panel while a third drafts the appendix. But three agents sharing the same working tree means three agents writing to the same files. Overwritten edits, lost work, and conflicts that only surface after both sides have already drifted.</p>
+
+    <!-- ================= The fix ================= -->
+    <h2 id="fix">The fix: one worktree per exploration</h2>
+    <p>A git worktree is exactly what it sounds like: a <em>separate working copy</em> of the same repository, on a separate branch. Same <code>.git</code> under the hood, different files on disk. Claude Code ships first-class support for them behind one flag:</p>
+<pre><code>claude -w text-llm</code></pre>
+    <p>That creates a fresh worktree at <code>.claude/worktrees/text-llm</code> on a new branch, launches Claude inside it, and leaves <code>main</code> untouched. Long form: <code>claude --worktree text-llm</code>. The name is optional &mdash; omit it and Claude picks one for you.</p>
+    <p>Inside the worktree, try things. If the trial wins, merge the branch back to <code>main</code>. If it loses, delete the worktree with <code>git worktree remove text-llm</code> and the failed history is gone &mdash; <code>main</code> never saw it, and no future session re-reads it.</p>
+
+    <!-- ================= Worked example ================= -->
+    <h2 id="example">A worked example: text classification</h2>
+    <p>I am classifying sentiment toward immigration in parliamentary speeches. I want to compare a modern LLM-based classifier with a traditional keyword/dictionary approach &mdash; two separate pipelines, two validation runs &mdash; and I want to run both <em>at the same time</em> without them colliding. Two terminals, two Claudes, one command each:</p>
+<pre><code>claude -w llm-classify
+claude -w keyword-classify</code></pre>
+    <p>Now each agent has its own working tree. The LLM agent writes prompts, annotates a validation set, and calls the model. The keyword agent builds a dictionary, runs regex, and computes precision/recall. Their files live at different paths on disk &mdash; <code>.claude/worktrees/llm-classify/</code> and <code>.claude/worktrees/keyword-classify/</code> &mdash; so they cannot overwrite each other. No <code>git stash</code> dance is needed to switch between them.</p>
+    <p>A week later the LLM approach wins on the held-out set. I merge <code>llm-classify</code> into <code>main</code> and remove the keyword worktree. The paper &mdash; and every future Claude session on <code>main</code> &mdash; sees only the classifier I kept. The dead branch does not hang around in <code>progress.md</code> whispering about keyword thresholds I no longer care about.</p>
+
+    <!-- ================= When to merge vs discard ================= -->
+    <h2 id="merge-discard">When to merge, when to discard</h2>
+    <ul>
+      <li><strong>Merge</strong> when the trial settles a question: a feature that sticks, a cleaning step that survives, a model that beats the baseline. Add a short note in <code>main</code>'s <code>progress.md</code> &mdash; <em>what</em> you decided and <em>why</em> &mdash; and drop the detailed exploration log along with the branch history.</li>
+      <li><strong>Discard</strong> when the trial answered "no." Delete the worktree; keep one sentence in <code>main</code>'s <code>progress.md</code> noting you tried X and it did not work, so you do not re-try it six months later.</li>
+    </ul>
+    <p>Either way, <code>main</code> stays a record of load-bearing decisions rather than a graveyard of every false start. That is what keeps Claude Code sharp over the long months of a real project.</p>
+
+    <!-- ================= Source ================= -->
+    <h2 id="source">Source</h2>
+    <p>Documented under the <code>--worktree</code> flag in Claude Code's <a href="https://code.claude.com/docs/en/cli-reference" target="_blank" rel="noopener">CLI reference</a>. Related: <a href="../compound-engineering/">Dispatch #9</a> on Compound Engineering, for the broader brainstorm &rarr; plan &rarr; work &rarr; review loop this slots into.</p>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>

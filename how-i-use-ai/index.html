@@ -20,7 +20,7 @@
 
     <h1>How I Use AI as an Economist</h1>
     <p class="page-subtitle">Notes from using AI in real, months-long research projects. Not a tutorial &mdash; what I have learned, what works, and what doesn't. Written for researchers who already use AI and want tricks beyond the basics.</p>
-    <p class="page-updated">Last updated: April 20, 2026. <a href="../uploads/how_i_use_ai.pdf" target="_blank" rel="noopener">Download PDF version</a>.</p>
+    <p class="page-updated">Last updated: April 21, 2026. <a href="../uploads/how_i_use_ai.pdf" target="_blank" rel="noopener">Download PDF version</a>.</p>
 
     <!-- ============================================================ -->
     <!-- PRINCIPLES -->
@@ -48,6 +48,17 @@
     <!-- ============================================================ -->
     <h2 id="dispatches">Dispatches</h2>
     <p class="section-intro">Notes I add as I learn. Sorted by most recently updated. Each card carries a permanent number (<code>#N</code>) and a floating <code>Updated</code> date.</p>
+
+    <!-- ========== Dispatch #13 — Git worktrees (own page) ========== -->
+    <article class="dispatch-card dispatch-card--linked">
+      <header class="dispatch-meta">
+        <span class="dispatch-num">#13</span>
+        <span class="dispatch-date">Updated Apr 21, 2026</span>
+      </header>
+      <h3 class="dispatch-title"><a href="dispatches/git-worktrees/">Git worktrees in Claude Code: keep <code>main</code> clean, run agents in parallel</a></h3>
+      <p class="dispatch-teaser">Research runs for months and most trials fail. Keeping every failed attempt on <code>main</code> pollutes Claude's context; running parallel agents on one tree creates file conflicts. One flag &mdash; <code>claude -w &lt;name&gt;</code> &mdash; isolates each exploration in its own worktree, so only the winners ever touch <code>main</code>.</p>
+      <p class="dispatch-read-link"><a href="dispatches/git-worktrees/">Read &rarr;</a></p>
+    </article>
 
     <!-- ========== Dispatch #12 — Reviewing Claude Code (own page) ========== -->
     <article class="dispatch-card dispatch-card--linked">
