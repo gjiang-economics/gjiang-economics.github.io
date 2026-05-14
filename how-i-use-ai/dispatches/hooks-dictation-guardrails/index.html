@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #3 - Hooks</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #3</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#3</span>
+      <span class="dispatch-date">Updated April 8, 2026</span>
+    </p>
+    <h1>Hooks: automatic context and guardrails</h1>
+    <p class="page-subtitle">Use hooks to inject context, block dangerous actions, and automate repetitive checks every time Claude Code runs.</p>
+
+    <p>Hooks are shell scripts that Claude Code runs automatically on specific events &mdash; prompt submission, tool execution, file edits. You configure them once and they enforce rules in every session. Typical uses:</p>
+    <ul>
+      <li><strong>Inject context</strong> &mdash; tell Claude your prompt was dictated, or that you are on a specific machine.</li>
+      <li><strong>Block dangerous actions</strong> &mdash; intercept tool calls to prevent force-pushes or unapproved deletions.</li>
+      <li><strong>Automate repetitive steps</strong> &mdash; run linting or update changelogs automatically.</li>
+    </ul>
+    <p><strong>My most-used hook: dictation context.</strong> I dictate with <a href="https://wisprflow.ai/get-started" target="_blank" rel="noopener">Wispr Flow</a>. Speech-to-text as a non-native English speaker occasionally mishears words or drops articles. A prompt-submit hook tells Claude the input was dictated so it silently corrects artifacts instead of asking for clarification.</p>
+    <p>Save this as <code>~/.claude/hooks/dictation-context.sh</code>:</p>
+<pre><code>#!/bin/bash
+cat &lt;&lt;'EOF'
+DICTATION NOTICE: The user's prompt was likely dictated
+using Wispr Flow (speech-to-text). The user is a native
+Chinese (Mandarin) speaker. The transcription may contain:
+- Homophones or near-homophones (e.g. "EA" &rarr; "it")
+- Misheard technical terms or proper nouns
+- Missing or wrong articles, prepositions, or plurals
+- Run-on sentences or missing punctuation
+
+Mentally correct any likely transcription artifacts and
+interpret the intended meaning. Do not ask for clarification
+on obvious transcription errors &mdash; just fix them silently.
+EOF</code></pre>
+    <p>Then activate it in <code>~/.claude/settings.json</code>:</p>
+<pre><code>{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "command": "$HOME/.claude/hooks/dictation-context.sh"
+      }
+    ]
+  }
+}</code></pre>
+    <p>Adapt the script to your own native language &mdash; just change "Chinese (Mandarin)" and the example error patterns to match your accent.</p>
+    <p>For a curated collection of other hook ideas, see <a href="https://x.com/zodchiii/status/2040000216456143002" target="_blank" rel="noopener">this tweet by @zodchiii</a>. Full documentation: <a href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">official hooks docs</a>.</p>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>

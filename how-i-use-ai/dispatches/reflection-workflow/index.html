@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #8 - The reflection workflow</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #8</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#8</span>
+      <span class="dispatch-date">Updated April 13, 2026</span>
+    </p>
+    <h1>The reflection workflow</h1>
+    <p class="page-subtitle">Turn one hard-won AI session into reusable instructions, skills, memories, or settings so the next similar task starts further ahead.</p>
+
+    <p>Perhaps the most powerful technique I have found. When you encounter a new type of task:</p>
+    <ol>
+      <li><strong>Push Claude Code to its best.</strong> Work through the task iteratively.</li>
+      <li><strong>Do not delete the session history.</strong> The full history is essential for what comes next.</li>
+      <li><strong>Ask Claude Code to reflect:</strong></li>
+    </ol>
+<pre><code>Reflect on this entire session. Is there anything you
+should save as a skill, a memory, or a setting change
+so that next time we do this, it goes faster?</code></pre>
+    <p>Claude Code will then create reusable artifacts &mdash; skills, memories, or configuration changes. The first time you do a task with AI might not save time. The second time, it will. For more on creating skills, see <a href="https://x.com/zarazhangrui/status/2033978001126564186" target="_blank" rel="noopener">this walkthrough</a>.</p>
+    <p>I have built a dedicated <a href="../../../skills/reflection.md">reflection skill</a> that automates this process. Install it with:</p>
+<pre><code>mkdir -p ~/.claude/skills/reflection &amp;&amp; \
+curl -o ~/.claude/skills/reflection/SKILL.md \
+  https://gjiang-economics.github.io/skills/reflection.md</code></pre>
+    <p>Then at the end of any session, type <code>/reflection</code>.</p>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>

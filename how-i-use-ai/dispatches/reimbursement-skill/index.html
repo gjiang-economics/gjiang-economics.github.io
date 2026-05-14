@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #4 - Travel reimbursement as a skill</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #4</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#4</span>
+      <span class="dispatch-date">Updated April 9, 2026</span>
+    </p>
+    <h1>Travel reimbursement as a skill</h1>
+    <p class="page-subtitle">After a conference, I use a custom Claude Code skill to turn receipts, policies, and templates into a reimbursement package.</p>
+
+    <p>After a conference, I use Claude Code to prepare reimbursement documents using a custom <em>skill</em>.</p>
+    <p><strong>Step 1: Organize your folder.</strong></p>
+<pre><code>reimbursement/
+|-- proofs/                        # Receipts and payment evidence
+|   |-- 01 flight receipt.pdf
+|   |-- 01 boarding pass.pdf
+|   |-- 03 hotel invoice.pdf
+|   |-- 06 taxi receipt.pdf
+|   |-- 11 city tax photo.JPG      # Photos of paper receipts work too
+|-- host_reimbursement_policy.pdf   # Instructions from the host
+|-- summary_template.xlsx           # Excel template (if any)</code></pre>
+    <p>Files in <code>proofs/</code> are numbered by item. Files sharing the same prefix (e.g., <code>01</code>) belong to the same expense.</p>
+    <p><strong>Step 2: Install the skill.</strong></p>
+<pre><code>mkdir -p ~/.claude/skills/reimburse-external &amp;&amp; \
+curl -o ~/.claude/skills/reimburse-external/SKILL.md \
+  https://gjiang-economics.github.io/skills/reimburse-external.md</code></pre>
+    <p>The skill walks Claude through a 10-phase workflow: read the host's policy, catalog receipts, verify against rules, calculate the claim with currency conversion, fill in templates, merge receipts into a single PDF, and draft the submission email. <a href="../../../skills/reimburse-external.md">View the full skill file.</a></p>
+    <p><strong>Step 3: Run it.</strong> Open the reimbursement folder in VS Code and type:</p>
+<pre><code>/reimburse-external</code></pre>
+    <p><strong>Adapting this.</strong> This skill handles <em>external</em> reimbursement (conference hosts, funding bodies). For your university's process, create a separate skill &mdash; ask Claude Code to reflect after your first reimbursement and it will build one tailored to your institution.</p>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>

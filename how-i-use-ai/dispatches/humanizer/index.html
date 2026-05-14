@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guohui Jiang - Dispatch #6 - Humanizer</title>
+  <link rel="stylesheet" href="../../../content-page.css?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="topbar">
+    <a href="../../../index.html" class="topbar-name">Guohui Jiang</a>
+    <a href="../../../index.html" class="topbar-back">&larr; Homepage</a>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Breadcrumb back to hub -->
+    <div class="cross-nav">
+      <a href="../../">&larr; How I Use AI</a>
+      <span class="active">Dispatch #6</span>
+    </div>
+
+    <p class="dispatch-meta">
+      <span class="dispatch-num">#6</span>
+      <span class="dispatch-date">Updated April 11, 2026</span>
+    </p>
+    <h1>Humanizer: strip AI writing patterns</h1>
+    <p class="page-subtitle">A small skill for detecting common AI writing tics and rewriting text so it sounds more natural.</p>
+
+    <p>AI text has telltale patterns &mdash; inflated language, filler phrases, em dashes everywhere. The <a href="https://github.com/blader/humanizer" target="_blank" rel="noopener">humanizer</a> skill detects 29 such patterns and rewrites text to sound natural.</p>
+    <p><strong>Claude Code.</strong> Install and run <code>/humanizer</code>:</p>
+<pre><code>mkdir -p ~/.claude/skills/humanizer &amp;&amp; \
+git clone https://github.com/blader/humanizer.git \
+  ~/.claude/skills/humanizer</code></pre>
+    <p><strong>Claude AI (web) and Claude Desktop.</strong> Create a Project, then paste the <a href="https://github.com/blader/humanizer/blob/main/SKILL.md" target="_blank" rel="noopener">SKILL.md</a> contents into the Project's custom instructions.</p>
+
+    <!-- FOOTER -->
+    <div class="page-footer">
+      <p><a href="../../">&larr; All dispatches</a></p>
+    </div>
+
+  </main>
+
+  <script src="../../../script.js?v=3"></script>
+</body>
+</html>
