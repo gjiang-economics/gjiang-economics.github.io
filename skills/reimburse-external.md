@@ -33,6 +33,10 @@ Files in `proofs/` follow the convention from the `reimbursement-summary` skill:
 
 Read  `targobank.pdf' in `references/` subfolder
 
+## Local-Only Reimbursement Profile
+
+Before filling reimbursement forms, read the gitignored local file `references/guohui_reimbursement_profile.md` if it exists. It contains private contact details and the approved signature image path for reimbursement/travel-expense forms only. If the local profile or signature asset is missing, ask Guohui for the needed field or authorization; do not invent it, and do not commit those private files.
+
 ## Workflow
 
 ### Phase 1 — Understand the host's requirements
@@ -51,6 +55,8 @@ Read ALL non-receipt files in the working directory (everything outside `proofs/
 6. **Deadline**: when must the submission arrive?
 7. **Template**: is there an Excel or other summary template to fill in?
 8. **Previously submitted documents**: has Guohui already sent forms (e.g., self-declaration, bank details) that do NOT need to be re-sent?
+
+If the host requests Form W-8BEN or a foreign-national/international-information form, invoke `us-reimbursement-tax-forms`. That focused skill owns the field audit, mandatory missing-information stop, verified signing workflow, tax/immigration attachments, and form-specific email language. Do not begin filling those forms inside this general workflow. Continue the receipt and expense work independently when safe, then incorporate the focused skill's final signed paths and attachment list into the overall submission packet.
 
 ### Phase 2 — Read and catalog all receipts
 
@@ -124,25 +130,34 @@ Do NOT overwrite the original template.
 
 Before merging, present the proposed document list to Guohui and ask for confirmation. Show:
 
-| # | Item | Document to include | Why this one |
-|---|------|---------------------|--------------|
+| # | Item | Document to include | Reimburser requirement | Why this is sufficient |
+|---|------|---------------------|------------------------|------------------------|
+
+Also show a short **excluded / backup documents** list for relevant documents you read but do not plan to submit:
+
+| Document | Exclude or backup? | Reason |
+|----------|--------------------|--------|
 
 **Document selection principles:**
 
-1. **When unsure, include more rather than less.** It is better to submit an extra document than to miss one. The host can ignore extras, but missing documents cause rejection.
-2. **Ask Guohui when the choice is ambiguous.** Don't silently exclude documents.
-3. **For each expense item, include the primary receipt.** If there are multiple documents for one item and you're unsure which is the "real" receipt, include all of them.
-4. **Image files (JPG, PNG) are valid receipts** — especially photos of paper receipts (e.g., taxi receipts, hotel city tax receipts). These must be converted to PDF before merging using Pillow.
+1. **The reimburser's instructions control the packet.** Submit only documents that are explicitly requested or reasonably required to prove a claimed expense.
+2. **Treat alternatives as alternatives, not cumulative requirements.** If the reimburser asks for "passenger receipt, boarding passes, or similar," a passenger receipt is sufficient unless another instruction specifically asks for boarding passes.
+3. **Prefer the minimum required and sufficient proof.** For each expense item, include the primary service-provider receipt/invoice/tax receipt that satisfies the reimburser's stated fields (name, date, amount, route, etc.).
+4. **Use supplemental documents only when needed.** Add a boarding pass, itinerary, booking confirmation, payment confirmation, or bank statement only if the reimburser requires it, the primary receipt lacks a required field, or Guohui explicitly approves a more complete backup packet.
+5. **Ask Guohui when requirements are ambiguous.** Do not silently include extra documents just because they exist.
+6. **Keep useful extras as backups, not default attachments.** If a document may be useful only if the reimburser follows up, save it separately or mention "available upon request" in the email draft instead of putting it in the main merged PDF.
+7. **Image files (JPG, PNG) are valid receipts only when they are the required proof** — especially photos of paper receipts (e.g., taxi receipts, hotel city tax receipts). Convert required images to PDF before merging using Pillow.
 
-**What to always include:**
-- Flights: e-ticket/receipt + boarding pass
-- Hotel: the hotel's own tax receipt/invoice + booking confirmation if it shows a different useful detail (e.g., EUR amount vs USD on the invoice)
-- Taxis: the receipt that shows name, date, amount, and route
-- Any paper receipt photos (JPG/PNG) — these are often the ONLY receipt from the service provider
+**Examples of requirement-matched inclusion:**
+- Flights: include the passenger receipt/invoice by default; include boarding passes only if the reimburser explicitly asks for boarding passes, requires proof of travel beyond the receipt, or Guohui asks for a backup version.
+- Hotel: include the hotel's own tax receipt/invoice when required; include a booking confirmation only if it supplies a required missing detail.
+- Taxis/local transport: include the service-provider receipt/ticket showing the reimburser's required details; exclude unrelated departure-airport transfers if the host does not cover them.
+- Paper receipts/photos: include them when they are the primary receipt from the provider.
 
 **What to exclude (unless Guohui says otherwise):**
 - PayPal payment confirmations (payment evidence, not service receipts)
 - Bank/Wise statements for items that already have a direct receipt
+- Duplicate itineraries, booking screenshots, boarding passes, or payment confirmations when the reimburser asked only for receipts and the receipt already proves the claim
 
 ### Phase 7 — Merge into one PDF
 
@@ -172,14 +187,17 @@ Merged PDF verification:
 
 ### Phase 9 — Draft the email
 
-Write a concise email draft and save it as `EMAIL_DRAFT.txt`. Include:
+Write a concise email draft and save it as `EMAIL_DRAFT.txt`.
 
 - TO/CC addresses
 - Subject line
-- Brief body listing what's attached
-- Total amount claimed and the host's cap
-- Note about any previously submitted forms
-- Sign-off with name + affiliation + email
+- A brief body in Guohui's style:
+  - Start with `Dear [First name],`
+  - Say: `Please find attached my completed travel reimbursement form and the supporting receipts for [event] in [place/date].`
+  - State `The total amount claimed is EUR X:` and list the claimed items as short bullets.
+  - End with `Thank you so much.`
+- Do not add a sign-off, name, affiliation, email address, or signature block by default. Guohui's email client already has a default signature.
+- Do not add "originals available upon request" or other administrative notes unless the reimburser specifically asks for them or the note is needed to explain missing/backup documents.
 
 ### Phase 10 — Final summary
 
@@ -196,6 +214,15 @@ Print a clear summary for Guohui:
 
 Verify if each financial number is correct: make sure that Guohui claims every money he deserves to receive.
 
+### Phase 12 — Clean up intermediate files
+
+After the final submission packet has been verified, clean up generated files that are not needed for submission.
+
+1. Keep final submission files: signed/filled forms, merged receipt PDFs, required separate attachments, email draft, checklist, and any final editable source the user may need.
+2. Keep original source documents: receipts, proofs, host emails, blank templates, conference documents, and payment records. Never delete originals.
+3. Delete generated scratch files that were only used during processing, such as render-check PNGs, contact sheets, temporary converted PDFs already embedded in the final merged PDF, failed exports, obsolete unsigned duplicates when a signed final exists, and temporary scripts/folders.
+4. Before deleting files in the project folder, show Guohui a short proposed cleanup list and proceed only when he has approved it or explicitly asked for cleanup. Temporary files outside the project folder may be removed directly.
+5. Mention in the final summary which files were kept for submission and which intermediate files were removed.
 
 ## Important Notes
 

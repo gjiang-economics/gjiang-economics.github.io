@@ -225,6 +225,21 @@ a:focus {
   color: var(--color-brand-hover);
 }
 
+.coauthor-link,
+.coauthor-link:visited {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+.coauthor-link:hover,
+.coauthor-link:focus-visible {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
 /* === Abstract Toggle === */
 .abstract-link {
   cursor: pointer;
@@ -451,4 +466,3 @@ pre code {
     font-size: 18px;
   }
 }
-
