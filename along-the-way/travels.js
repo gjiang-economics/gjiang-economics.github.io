@@ -10,9 +10,10 @@
     const svg = d3.select("#travel-map");
     // Crop the viewport, never city coordinates or the geographic projection.
     const width = 1100, height = 300;
+    const viewLeft = 100, viewWidth = 920;
     const projection = d3.geoNaturalEarth1().fitExtent([[30, 12], [1070, 525]], {type:"Sphere"});
     const geoPath = d3.geoPath(projection);
-    svg.append("defs").append("clipPath").attr("id","viewport-clip").append("rect").attr("width",width).attr("height",height);
+    svg.append("defs").append("clipPath").attr("id","viewport-clip").append("rect").attr("x",viewLeft).attr("width",viewWidth).attr("height",height);
     const geography = svg.append("g").attr("clip-path","url(#viewport-clip)").append("g").attr("aria-hidden", "true");
     geography.append("path").datum(d3.geoGraticule10()).attr("class", "graticule").attr("d", geoPath);
     const land = topojson.feature(topology, topology.objects.land);
@@ -33,11 +34,11 @@
     const popup=document.getElementById('event-popup');
     let year='all',selectedId=null,transform=d3.zoomIdentity,nodes=[];
     function layout(){
-      const unit=width/svg.node().getBoundingClientRect().width;
+      const unit=viewWidth/svg.node().getBoundingClientRect().width;
       nodes=places.filter(e=>year==='all'||e.year===Number(year)).map(e=>{
         const [ax,ay]=transform.apply(projection([e.longitude,e.latitude]));
         return {...e,ax,ay,x:ax,y:ay};
-      }).filter(e=>e.ax>=0&&e.ax<=width&&e.ay>=0&&e.ay<=height);
+      }).filter(e=>e.ax>=viewLeft&&e.ax<=viewLeft+viewWidth&&e.ay>=0&&e.ay<=height);
       // City anchors never move. Segments share the same center and each opens one event.
       const cities=Array.from(d3.group(nodes,e=>e.place_id),([id,events])=>({id,events,x:events[0].ax,y:events[0].ay}));
       const groups=pins.selectAll('g.city-pin').data(cities,c=>c.id).join('g')
@@ -86,7 +87,7 @@
       const selected=pins.selectAll('.map-pin').attr('aria-pressed','false').filter(e=>e.id===id);
       if(restoreFocus)selected.node()?.focus({preventScroll:true});
     }
-    const zoom=d3.zoom().scaleExtent([1,80]).extent([[0,0],[width,height]])
+    const zoom=d3.zoom().scaleExtent([1,80]).extent([[viewLeft,0],[viewLeft+viewWidth,height]])
       .filter(ev=>ev.type!=='wheel'&&!ev.target.closest('.city-pin')&&(!ev.button||ev.type==='touchstart'))
       .on('zoom',ev=>{transform=ev.transform;geography.attr('transform',transform);layout();});
     svg.call(zoom);
