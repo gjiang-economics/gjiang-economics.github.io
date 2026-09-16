@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- Generated page; edit the source template. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An illustrated atlas of Guohui Jiang’s conferences, seminars, research and archive visits, and summer schools.">
+  <title>Along the Way · Guohui Jiang</title>
+  <link rel="icon" href="../img/avatar.png">
+  <link rel="stylesheet" href="../content-page.css">
+  <link rel="stylesheet" href="travels.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script defer src="vendor/d3.v7.min.js"></script>
+  <script defer src="vendor/topojson-client.min.js"></script>
+  <script defer src="travels.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#travel-map">Skip to the map</a>
+  <nav class="topbar" aria-label="Main navigation">
+    <a href="../" class="topbar-name">Guohui Jiang <span class="nav-divider">/</span> <span class="nav-current">Along the Way</span></a>
+    <a href="../" class="topbar-back">← Homepage</a>
+  </nav>
+  <main class="atlas-page">
+    <div class="atlas-intro">
+      <div class="intro-copy">
+        <h1>Along the <em>Way</em></h1>
+        <p class="intro-text">A few stops on a longer journey.</p>
+      </div>
+
+    </div>
+
+    <div id="filters" class="filter-bar" hidden>
+      <label class="year-filter">Year <select id="year-filter"><option value="all">All years</option><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option></select></label>
+    </div>
+
+    <section class="map-sheet" aria-label="Interactive travel atlas">
+      <div class="map-canvas">
+        <svg id="travel-map" tabindex="-1" viewBox="0 0 1100 300" role="group" aria-label="Along the Way map, initially focused on the Northern Hemisphere" aria-describedby="map-help"></svg>
+        <div class="map-controls" hidden>
+          <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+          <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+          <button type="button" id="reset-map" aria-label="Reset map view">↺</button>
+        </div>
+        <div id="event-popup" class="event-popup" hidden role="region" aria-label="Event details"><button id="close-event" type="button" aria-label="Close event details">×</button><h2 id="event-title"></h2><p id="event-institution"></p><p id="event-location"></p><p id="event-date" aria-live="polite"></p></div>
+        <div id="map-loading" class="map-loading" role="status">Loading the atlas…</div>
+      </div>
+      <div class="map-footer"><span id="map-help">Select a dot or segment for one event. Use + to explore nearby cities.</span></div>
+    </section>
+
+    <footer class="page-footer"><a href="../uploads/cv_jiang_guohui.pdf" target="_blank" rel="noopener">Curriculum Vitae ↗</a><span class="map-credit">Map: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · <a href="https://d3js.org/" target="_blank" rel="noopener">D3</a></span></footer>
+  </main>
+  <noscript><p class="noscript-note">Enable JavaScript to explore the interactive map.</p></noscript>
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"62f8f2199cf240e484b5a45b0aa3512b"}'></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+/* Illustrated atlas, scoped to the travel page. Geographic shapes stay exact. */
+:root { --paper:#faf8f2; --ink:#344b46; --muted:#65766e; --line:#d9dfd2; --ocean:#e5f0ee; }
+body { background:var(--paper); color:var(--ink); }
+[hidden] { display:none !important; }
+button,select { font:inherit; }
+button, a, select { -webkit-tap-highlight-color:transparent; }
+button { cursor:pointer; }
+button:focus-visible,a:focus-visible,select:focus-visible,[tabindex]:focus-visible { outline:3px solid #315f70; outline-offset:4px; }
+.topbar { background:rgba(250,248,242,.96); border-color:var(--line); padding:17px max(24px,calc((100vw - 1160px)/2)); }
+.topbar-name { color:var(--ink); }.nav-divider { color:#b1b9ac; margin:0 14px; }.nav-current { font-weight:400; color:var(--muted); }
+.skip-link { position:absolute; left:16px; top:-100px; z-index:110; background:white; padding:12px; }.skip-link:focus { top:12px; }
+.atlas-page { max-width:1160px; margin:auto; padding:58px 28px 24px; }
+.atlas-intro { display:flex; align-items:center; justify-content:space-between; gap:30px; margin-bottom:38px; }
+.eyebrow { font-size:10px; letter-spacing:2px; font-weight:600; color:var(--muted); margin:0 0 17px; }
+.little-star { font-size:19px; margin-right:8px; color:#bf7750; vertical-align:-1px; }
+h1 { font-family:Georgia,'Times New Roman',serif; font-weight:400; font-size:64px; line-height:1.08; letter-spacing:-2.8px; margin:0 0 18px; color:var(--ink); }
+h1 em { color:#708874; font-weight:400; }
+.intro-text { font-size:15px; color:var(--muted); line-height:1.8; margin:0; }
+
+
+.filter-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:17px; }
+
+
+
+.year-filter { font-size:11px; color:var(--muted); display:flex; align-items:center; gap:8px; }.year-filter select { color:var(--ink); background:#fffdf8; border:1px solid var(--line); border-radius:8px; padding:7px 24px 7px 9px; font-size:11px; }
+.map-sheet { border:1px solid #c8d4c8; border-radius:16px 20px 15px 18px; overflow:hidden; background:var(--ocean); box-shadow:0 6px 0 -3px var(--paper),0 7px 0 -3px #d5dcd1,0 15px 24px -22px #456458; }
+.map-heading { display:flex; justify-content:space-between; padding:15px 22px 0; font-size:9px; letter-spacing:1.65px; color:#647f79; position:relative; z-index:1; }.tiny-dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:#bd785b; margin:0 7px 2px 0; }
+.map-canvas { position:relative; min-height:240px; }#travel-map { display:block; width:100%; height:auto; touch-action:none; cursor:grab; }#travel-map:active { cursor:grabbing; }
+.map-controls { position:absolute; right:18px; top:20px; display:flex; flex-direction:column; border:1px solid #c2d0c4; border-radius:10px; overflow:hidden; box-shadow:0 2px 6px #4a645710; }.map-controls button { width:34px; height:34px; border:0; background:#fffdf5ed; color:var(--ink); font-size:20px; }.map-controls button+button { border-top:1px solid #dce4d9; }.map-controls button:hover { background:#e8eddf; }
+.map-footer { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:13px 22px; border-top:1px solid #cdded7; background:#edf3ec; color:#617a70; font-size:10px; }.map-footnote { white-space:nowrap; font-style:italic; }
+.map-loading { position:absolute; top:50%; left:12%; right:12%; text-align:center; font-size:14px; color:var(--muted); pointer-events:none; }
+.graticule { fill:none; stroke:#b6cec8; stroke-width:.5; opacity:.6; }.land { fill:#e9ead6; stroke:#829e8c; stroke-width:.65; stroke-linejoin:round; }.land-shadow { fill:none; stroke:#91aba0; stroke-width:2.4; opacity:.12; }
+.ocean-label { font-family:Georgia,serif; font-style:italic; fill:#708f8c; font-size:13px; letter-spacing:2px; opacity:.85; pointer-events:none; }.compass { stroke:#7e9b91; fill:none; stroke-width:.8; }.compass text { stroke:none; fill:#789487; font-family:Georgia,serif; font-size:10px; }
+.map-pin { cursor:pointer; }.pin-halo { fill:white; opacity:.65; }.pin-body { stroke:#fffdf3; stroke-width:2; filter:drop-shadow(0 2px 2px #35554c30); }.pin-symbol { fill:#fffdf5; font-size:13px; font-weight:600; text-anchor:middle; dominant-baseline:central; pointer-events:none; }.map-pin[aria-pressed=true] .pin-halo { fill:#244b44; opacity:.25; }.map-pin:hover .pin-halo,.map-pin:focus .pin-halo { opacity:1; stroke:#56786c; stroke-width:1; }.map-pin:focus { outline:none; }.pin-label { fill:var(--ink); stroke:var(--paper); stroke-width:3px; paint-order:stroke; font-size:10px; text-anchor:middle; pointer-events:none; }
+.selection-panel { display:flex; justify-content:space-between; align-items:center; gap:20px; margin:23px 0 0; padding:18px 23px; background:#f0f1e7; border:1px solid var(--line); border-radius:12px; }.selection-panel .eyebrow { margin:0 0 5px; font-size:9px; }.selection-panel h2 { font:24px Georgia,serif; border:0; padding:0; margin:0; color:var(--ink); }.selection-panel p:last-child { margin:4px 0 0; font-size:12px; color:var(--muted); }.selection-panel button { font-size:11px; background:transparent; border:1px solid #bfcaba; padding:9px 13px; color:var(--ink); border-radius:20px; white-space:nowrap; }
+
+
+
+#empty-state { padding:25px 0; font-size:14px; }.page-footer { margin-top:26px; border-top:1px solid var(--line); padding:24px 0 6px; display:flex; gap:16px; flex-wrap:wrap; justify-content:space-between; color:var(--muted); font-size:11px; }.page-footer a { color:inherit; text-decoration:none; }.page-footer a:hover { text-decoration:underline; }.map-credit { font-size:10px; }.noscript-note { text-align:center; font-size:13px; padding:20px; }
+@media(min-width:1400px) { .atlas-page { padding-top:65px; } }
+@media(max-width:760px) { .atlas-page { padding:32px 18px 18px; }.atlas-intro { margin-bottom:26px; gap:10px; }h1 { font-size:46px; letter-spacing:-1.8px; }.intro-text { font-size:13px; }.eyebrow { letter-spacing:1.3px; font-size:9px; }.filter-bar { align-items:flex-start; }.map-heading { padding:13px 13px 0; font-size:8px; letter-spacing:1px; }.map-edition { display:none; }.map-footer { padding:11px 13px; font-size:9px; }.map-footnote { display:none; }.map-canvas { min-height:0; }#travel-map { height:250px; }.map-controls { right:10px; top:12px; }.map-controls button { width:32px; height:32px; }.nav-current,.nav-divider { display:none; }.topbar { padding:14px 18px; }.selection-panel { padding:16px; }.selection-panel h2 { font-size:21px; } }
+@media(max-width:480px) { h1 { font-size:40px; }.intro-text br { display:none; }.selection-panel { align-items:flex-start; flex-direction:column; gap:12px; }.page-footer>span:first-child { width:100%; } }
+@media(prefers-reduced-motion:reduce) { * { scroll-behavior:auto !important; transition:none !important; } }
+
+#place-choices { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.filter-bar { justify-content:flex-end; }
+
+.event-popup { position:absolute; z-index:5; box-sizing:border-box; width:280px; max-width:calc(100% - 16px); padding:18px 32px 16px 18px; background:#fffdf7; border:1px solid #b8c7b5; border-radius:12px; box-shadow:0 5px 22px #344b4630; }
+.event-popup h2 { font-size:15px; line-height:1.4; margin:0 0 9px; padding:0; border:0; color:var(--ink); }
+.event-popup p { font-size:11px; line-height:1.5; margin:5px 0 0; color:var(--muted); }
+#close-event { position:absolute; top:5px; right:6px; width:28px; height:28px; border:0; background:transparent; color:var(--ink); font-size:23px; }
+@media(max-width:760px) { #travel-map { height:390px; } }
+
+path.map-pin[aria-pressed=true], path.map-pin:focus-visible { stroke:#244b44; stroke-width:2px; filter:drop-shadow(0 0 3px #fff); }
+
+/* Northern Hemisphere overview; retain room for touch gestures and detail cards. */
+.map-canvas { min-height:0; }
+@media(max-width:760px) { #travel-map { height:280px; } }
