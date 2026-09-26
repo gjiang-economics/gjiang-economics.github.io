@@ -12,7 +12,34 @@
 
     <!-- LEFT SIDEBAR -->
     <header>
-      <h1><a href="#">Guohui Jiang</a></h1>
+      <div class="name-line">
+        <h1><a href="#">Guohui Jiang</a></h1>
+        <button class="name-speaker" type="button" aria-label="Hear Guohui Jiang pronounced" aria-controls="pronunciation-help" aria-expanded="false" aria-haspopup="dialog" data-pronunciation="name-audio" title="Hear my name">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></svg>
+        </button>
+      </div>
+      <div class="pronunciation-help" id="pronunciation-help" role="dialog" aria-labelledby="pronunciation-title" hidden>
+        <div class="pronunciation-body">
+          <button class="pronunciation-close" type="button" aria-label="Close pronunciation help">×</button>
+          <p id="pronunciation-title" class="pronunciation-title">Hear my name</p>
+          <p class="syllable-hint">Guo <span aria-hidden="true">·</span> hui</p>
+          <p class="pronunciation-caption">Given name · two syllables</p>
+          <p class="syllable-hint">Jiang</p>
+          <p class="pronunciation-caption">Surname · one syllable</p>
+          <div class="pronunciation-phonetics">
+            <p class="pronunciation-caption">English sound guide (approximate)</p>
+            <p class="pronunciation-respelling">gwoh · hway · jyahng</p>
+            <p class="pronunciation-pinyin">Pinyin: Guóhuī Jiāng</p>
+            <p>Listen for the exact sounds and tones.</p>
+          </div>
+          <button class="pronunciation-practice" type="button" data-pronunciation="name-audio">↻ Replay name</button>
+          <button class="pronunciation-practice" type="button" data-pronunciation="practice-audio">▶ Practise with me</button>
+          <p class="pronunciation-status" id="pronunciation-status" role="status"></p>
+          <p class="pronunciation-status">Synthesized speech · pronunciation approved by Guohui.</p>
+        </div>
+      </div>
+      <audio id="name-audio" src="audio/guohui-jiang-name.mp3" preload="none"></audio>
+      <audio id="practice-audio" src="audio/guohui-jiang-practice.mp3" preload="none"></audio>
       <p class="subtitle">Postdoc<br>
         <a href="https://economics.uni-koeln.de/en/team/faculty-and-post-docs/guohui-jiang" target="_blank" rel="noopener">Department of Economics</a><br>
         University of Cologne</p>
@@ -32,7 +59,6 @@
       <h2 id="bio">Bio</h2>
       <p>I am a postdoc in the <a href="https://economics.uni-koeln.de/en/team/faculty-and-post-docs/guohui-jiang" target="_blank" rel="noopener">Department of Economics, University of Cologne</a>.</p>
       <p>I am an applied microeconomist with research interests in economic history and political economy. I received my PhD from University of Zurich in 2025.</p>
-      <p>How to pronounce <a href="https://www.howtopronounce.com/guohui/1039657" target="_blank" rel="noopener">Guohui</a>?</p>
 
       <h2 id="contact">Contact</h2>
       <p><a href="uploads/cv_jiang_guohui.pdf?v=20260926184956" target="_blank">Curriculum Vitae (PDF)</a></p>

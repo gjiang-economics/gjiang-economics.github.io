@@ -12,6 +12,46 @@ function toggle(id) {
 
 // Open all external links in a new tab automatically
 document.addEventListener("DOMContentLoaded", function () {
+  var pronunciationButtons = document.querySelectorAll('[data-pronunciation]');
+  var pronunciationStatus = document.getElementById('pronunciation-status');
+  var pronunciationPanel = document.getElementById('pronunciation-help');
+  var nameSpeaker = document.querySelector('.name-speaker');
+  function closePronunciation(restoreFocus) {
+    pronunciationPanel.hidden = true;
+    nameSpeaker.setAttribute('aria-expanded', 'false');
+    document.querySelectorAll('#name-audio, #practice-audio').forEach(function (audio) { audio.pause(); });
+    if (restoreFocus) nameSpeaker.focus();
+  }
+  if (pronunciationPanel && nameSpeaker) {
+    pronunciationPanel.querySelector('.pronunciation-close').addEventListener('click', function () { closePronunciation(true); });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !pronunciationPanel.hidden) closePronunciation(true);
+    });
+    document.addEventListener('click', function (event) {
+      if (!pronunciationPanel.hidden && !pronunciationPanel.contains(event.target) && !nameSpeaker.contains(event.target)) closePronunciation(false);
+    });
+  }
+  pronunciationButtons.forEach(function (button) {
+    var audio = document.getElementById(button.dataset.pronunciation);
+    if (!audio) return;
+    button.addEventListener('click', function () {
+      pronunciationPanel.hidden = false;
+      nameSpeaker.setAttribute('aria-expanded', 'true');
+      if (button === nameSpeaker) pronunciationPanel.querySelector('.pronunciation-close').focus();
+      if (!audio.getAttribute('src')) {
+        pronunciationStatus.textContent = 'The recording is unavailable. Please try again later.';
+        return;
+      }
+      document.querySelectorAll('#name-audio, #practice-audio').forEach(function (otherAudio) { otherAudio.pause(); });
+      audio.currentTime = 0;
+      audio.play().then(function () {
+        pronunciationStatus.textContent = '';
+      }).catch(function () {
+        pronunciationStatus.textContent = 'The recording could not play. Please try again.';
+      });
+    });
+  });
+
   document.querySelectorAll('a[href]').forEach(function (link) {
     var href = link.getAttribute("href");
     if (href.startsWith("http") && !link.hasAttribute("target")) {
