@@ -1,5 +1,41 @@
 [
   {
+    "id": "2026-warwick-digital-history",
+    "year": 2026,
+    "title": "Digital History: Methodological Advances in Quantitative Economic History",
+    "institution": "University of Warwick",
+    "date_label": "22–23 October 2026",
+    "place_id": "coventry",
+    "city": "Coventry",
+    "country": "United Kingdom",
+    "longitude": -1.51,
+    "latitude": 52.41
+  },
+  {
+    "id": "2026-epfl-computational-future",
+    "year": 2026,
+    "title": "Computational Future",
+    "institution": "EPFL",
+    "date_label": "15–16 October 2026",
+    "place_id": "lausanne",
+    "city": "Lausanne",
+    "country": "Switzerland",
+    "longitude": 6.63,
+    "latitude": 46.52
+  },
+  {
+    "id": "2026-chicago-ai-social-science",
+    "year": 2026,
+    "title": "AI in Social Science Conference",
+    "institution": "University of Chicago",
+    "date_label": "8–9 October 2026",
+    "place_id": "chicago",
+    "city": "Chicago",
+    "country": "United States",
+    "longitude": -87.63,
+    "latitude": 41.88
+  },
+  {
     "id": "2026-aie-summer",
     "year": 2026,
     "title": "AI and Economics Summer Institute",
